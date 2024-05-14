@@ -5669,6 +5669,7 @@ label {
     margin-bottom: 25px;
     font-size: 18px;
     font-weight: 600; }
+
     @media (max-width: 767px) {
       .footer-area h6 {
         margin-bottom: 15px; } }
@@ -5702,10 +5703,10 @@ label {
 
 @media (max-width: 991px) {
   .single-footer-widget {
-    margin-bottom: 40px; } }
+    margin-bottom: 40px;} }
 .single-footer-widget .form-inline {
   display: inline-block;
-  width: 100%; }
+  width: 100%;}
 .single-footer-widget input {
   border: none;
   width: 80% !important;

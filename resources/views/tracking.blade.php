@@ -8,8 +8,8 @@
                 <div class="col-first">
                     <h1>Order Tracking</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="/home">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="/category">Fashon Category</a>
+                        <a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="/category">Fashion Category</a>
                     </nav>
                 </div>
             </div>

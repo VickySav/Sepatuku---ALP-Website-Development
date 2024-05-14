@@ -9,7 +9,7 @@
 				<div class="col-first">
 					<h1>Shop Category page</h1>
 					<nav class="d-flex align-items-center">
-						<a href="/home">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
 						<a href="/category">Fashion Category</a>
 					</nav>
@@ -207,7 +207,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p1.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p1.jpg" alt=""> </a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
@@ -240,7 +240,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p2.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p2.jpg" alt=""> </a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
@@ -273,7 +273,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p3.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p3.jpg" alt=""></a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
@@ -306,7 +306,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p4.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p4.jpg" alt=""> </a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
@@ -339,7 +339,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p5.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p5.jpg" alt="" href = "/category"> </a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
@@ -372,7 +372,7 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p6.jpg" alt="">
+								<a href = "/product-details"> <img class="img-fluid" src="img/product/p6.jpg" alt="" href = "/category"> </a>
 								<div class="product-details">
 									<h6>addidas New Hammer sole
 										for Sports person</h6>
