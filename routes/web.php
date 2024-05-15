@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -30,7 +31,11 @@ Route::get('/wishlist', [WishlistController::class,'ShowWishlist']);
 
 Route::get('/contact', [ContactController::class,'ShowContact']);
 
-Route::view('/admin','admin-catalog');
+Route::prefix('/admin')->group(function () {
+    Route::get('/transaction', [AdminController::class,'ShowTransaction']);
+    Route::get('/manageproduct',  [AdminController::class,'ShowCatalog']);
+});
+// Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');
 //Route::view('/tracking', 'tracking');
 

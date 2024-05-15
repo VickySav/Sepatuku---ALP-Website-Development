@@ -4183,6 +4183,7 @@ label {
   padding-top: 30px;
   padding-bottom: 30px;
   vertical-align: middle;
+
   align-self: center; }
   .cart_inner .table tbody tr td .media .d-flex {
     padding-right: 30px; }
@@ -5663,12 +5664,12 @@ label {
 ============================================================================================ */
 .footer-area {
   padding-top: 100px;
-  background-color: #222222; }
+  background-color: #222222;}
   .footer-area h6 {
     color: #fff;
     margin-bottom: 25px;
     font-size: 18px;
-    font-weight: 600; }
+    font-weight: 600;}
 
     @media (max-width: 767px) {
       .footer-area h6 {
@@ -5792,3 +5793,17 @@ label {
     color: #ffba00; }
 
 /*# sourceMappingURL=main.css.map */
+
+.table-admin {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table-admin th,
+  .table-admin td {
+    padding: 0.75rem;
+    vertical-align: top;
+   border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+

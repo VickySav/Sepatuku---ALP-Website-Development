@@ -50,7 +50,9 @@
                             <td>
 
                             </td>
-                    
+                    <td>
+                        
+                    </td>
                             <td>
                                 <div class="checkout_btn_inner float-right d-flex align-items-center">
                                     <a class="primary-btn" href="#">Continue Shopping</a>

@@ -13,7 +13,11 @@ body {
 }
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    /*background: #435d7d;*/
+    background: -webkit-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: -moz-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: -o-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
@@ -117,10 +121,16 @@ table.table .avatar {
     color: #666;
 }
 .pagination li.active a, .pagination li.active a.page-link {
-    background: #03A9F4;
+    background: -webkit-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: -moz-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: -o-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
 }
 .pagination li.active a:hover {
-    background: #0397d6;
+    background: -webkit-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+  background: -moz-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+  background: -o-linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+  background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
 }
 .pagination li.disabled i {
     color: #ccc;
