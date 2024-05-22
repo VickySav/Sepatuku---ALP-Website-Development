@@ -11,7 +11,9 @@
 					<div class="active-banner-slider owl-carousel">
 						<!-- single-slide -->
 						<div class="row single-slide align-items-center d-flex">
+
 							<div class="col-lg-5 col-md-6">
+                                @include('Template.alert')
 								<div class="banner-content">
 									<h1>Welcome to Sepatuku</h1>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

@@ -10,13 +10,12 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactController;
 
-// Route::get('/', function () {
-//     return view('login');
-// });
-//Route::view('/login', 'login');
 
 Route::get("/login", [AuthController::class,"ShowLogin"]);
+Route::post("/login",[AuthController::class,"PostLogin"])->name("PostLogin");
+Route::get("/logout",[AuthController::class,"PostLogout"])->name("logout");
 Route::get("/registration", [AuthController::class,"ShowCreateAcc"]);
+Route::post("/registration",[AuthController::class,"PostRegister"])->name("PostRegister");
 Route::get("/forgot-passowrd", [AuthController::class,"ShowForgotPass"]);
 Route::get('/',[HomeController::class,'ShowHome']);
 
