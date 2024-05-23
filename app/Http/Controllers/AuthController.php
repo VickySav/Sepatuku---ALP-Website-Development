@@ -41,7 +41,12 @@ class AuthController extends Controller
                     $request->session()->put('PASSWORD', $DBuser->PASSWORD );
                 }
                 //dd($request->cookies->all());
-                return redirect('/')->with('success','Login Succesfull');
+                if($DBuser->ROLES == 'User')
+                    return redirect('/')->with('success','Login Succesfull');
+                else
+                {
+                    return redirect('/admin/transaction')->with('success','Login Succesfull');
+                }
             }
             else{
                 //dd($request->cookies->all());
