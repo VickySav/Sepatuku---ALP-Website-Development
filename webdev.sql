@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS DETAIL_ORDER;
 DROP TABLE IF EXISTS DETAIL_PRODUK;
 DROP TABLE IF EXISTS DETAIL_WISHLIST;
 DROP TABLE IF EXISTS KATEGORI;
-DROP TABLE IF EXISTS ORDER_TABLE; 
+DROP TABLE IF EXISTS ORDER_TABLE;
 DROP TABLE IF EXISTS PRODUK;
 DROP TABLE IF EXISTS WISHLIST;
 
@@ -79,7 +79,7 @@ CREATE TABLE CART (
 CREATE TABLE DETAIL_CART (
  CART_ID             int unsigned not null,
  PRODUK_ID            VARCHAR(15) NOT NULL,
-    UKURAN               INT,
+ UKURAN               INT NOT NULL,
  JUMLAH               INT,
  foreign key (PRODUK_ID) references PRODUK(PRODUK_ID),
  foreign key (CART_ID) references CART(CART_ID)
@@ -131,7 +131,7 @@ CREATE TABLE DETAIL_WISHLIST (
  foreign key (PRODUK_ID) references PRODUK(PRODUK_ID)
 );
 #
-INSERT INTO `ACCOUNT` (`ACCOUNT_ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `PHONE_NUMBER`, `ADDRESS`,`ROLES`) VALUES 
+INSERT INTO `ACCOUNT` (`ACCOUNT_ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `PHONE_NUMBER`, `ADDRESS`,`ROLES`) VALUES
 ('1', 'Mario_Giancarlo_Cahyadi', '$2y$12$o2CPSMiN1WHkdkLzoJ/Vi.BgukxHmG4.eRqTbquBCEScJWdWQ6gm2', 'Mgiancarlo@student.ciputra.ac.id', '08123493252', 'Cornell Apartment, Surabaya, JawaTimur','User'),# Mario Giancarlo Cahyadi
 ('2', 'Tjok_Istri_Vicky_Savitri', '$2a$12$R1BROIFbTDZBg9WO0/5zneqnjw7wHGCP2ItYpyEw0fjHA3ASdoX8C', 'tistrivicky@student.ciputra.ac.id', '08128925845', 'Cornell Apartment, Surabaya, JawaTimur','User'),# Tjok Istri Vicky Savitri
 ('3', 'David_Lee', '$2a$12$nBTRoFBtAvy4aZpFDyhU9eM7NwVM6DiReMVmuZLRBOvAdWkE/YYCG', 'david.lee@example.com', '+61 2 1234 5678', '789 Elm Street, Anytown, Australia','User'),# P@ssw0rd
@@ -166,8 +166,8 @@ INSERT INTO KATEGORI (KATEGORI_ID,NAMA_KATEGORI) VALUES
 (3,'Anak anak');
 
 INSERT INTO PRODUK VALUES
-('P0001','1','Adidas handball spezial shoes','Upper Material: Leather/Suede Inner Material: Textile Sole Material: Rubber','assets/01-NIKE-FFSSBNIK5-NIKDZ2786400-Blue.webp','1700000'),
-('P0002', 1, 'Nike Air Force 1', 'Upper Material: Leather/Synthetic Leather Sole Material: Rubber', 'assets/air-force-1-07-shoes-WrLlWX.webp', 1500000),
+('P0001','1','Adidas Handball Spezial Shoes','Upper Material: Leather/Suede Inner Material: Textile Sole Material: Rubber','assets/adidas-1246-1324044-1.webp','1700000'),
+('P0002', 1, 'Nike Air Force 1', 'Upper Material: Leather/Synthetic Leather Sole Material: Rubber', 'assets/01-NIKE-FFSSBNIK5-NIKDZ2786400.jpg', 1500000),
 ('P0003', 2, 'Adidas Ultra Boost 2.0 Triple White', 'Upper Material: Primeknit Sole Material: Rubber', 'assets/adidas-ultra-boost-2.0-triple-white.webp', 2000000),
 ('P0004', 3, 'K-D Kids Rainbow Tab Shoe - Multi', 'Keep their sneaker rotation looking fresh with footwear like the K-D Rainbow Tab Sneakers. These funky shoes are great for mixing into a weekend outfit and feature a single tab for fastening with leather look panelling, and are made complete with a star embroidery to the front, stitched detailing and a textured sole for added grip.', 'assets/K-D-Kids-Rainbow-Tab-Shoe-Multi.webp', 500000),
 ('P0005', 1, 'Converse Chuck Taylor All Star', 'Upper Material: Canvas Sole Material: Rubber', 'assets/071A69AD4DE0A79949B564214BD96119.webp', 1000000),
@@ -241,12 +241,12 @@ INSERT INTO DETAIL_PRODUK (PRODUK_ID, UKURAN, JUMLAH) VALUES
 ('P0009', 43, 3),
 
 -- Adidas Originals X Disney Mickey Superstar 360 Shoes Kids (P0010)
-('P0010', 25, 5), 
-('P0010', 26, 5), 
-('P0010', 27, 5), 
+('P0010', 25, 5),
+('P0010', 26, 5),
+('P0010', 27, 5),
 
 -- New Balance 574 (P0011)
-('P0011', 42, 7), 
+('P0011', 42, 7),
 ('P0011', 43, 7),
 ('P0011', 44, 7),
 -- Adidas Stan Smith (P0012)
@@ -258,11 +258,11 @@ INSERT INTO DETAIL_PRODUK (PRODUK_ID, UKURAN, JUMLAH) VALUES
 ('P0013', 24, 5),
 ('P0013', 25, 3),
 -- Reebok Classic Leather (P0014)
-('P0014', 40, 3), 
+('P0014', 40, 3),
 ('P0014', 41, 3),
 ('P0014', 42, 3),
 -- Nike Air Jordan 1 (P0015)
-('P0015', 42, 7), 
+('P0015', 42, 7),
 ('P0015', 43, 7),
 ('P0015', 44, 8),
 -- Adidas originals x hello kitty and friends superstar 360 shoes kids (P0016)
@@ -270,18 +270,18 @@ INSERT INTO DETAIL_PRODUK (PRODUK_ID, UKURAN, JUMLAH) VALUES
 ('P0016', 21, 8),
 ('P0016', 23, 8),
 -- Under Armour HOVR Phantom 2 (P0017)
-('P0017', 43, 1), 
+('P0017', 43, 1),
 ('P0017', 44, 1),
 ('P0017', 45, 1),
 -- Converse Chuck 70 (P0018)
 ('P0018', 42, 5),
 ('P0018', 42, 5),
-('P0018', 42, 5), 
+('P0018', 42, 5),
 
 -- Kushyshoo Girls Nude Cat Flats Soft Mary Jane (P0019)
 ('P0019', 21, 6),
 ('P0019', 22, 6),
-('P0019', 23, 6), 
+('P0019', 23, 6),
 
 -- Skechers D`Lites (P0020)
 ('P0020', 39, 3),
@@ -289,15 +289,15 @@ INSERT INTO DETAIL_PRODUK (PRODUK_ID, UKURAN, JUMLAH) VALUES
 ('P0020', 41, 3),
 ('P0020', 42, 3),
 -- Puma Cali Sport (P0021)
-('P0021', 40, 5), 
+('P0021', 40, 5),
 ('P0021', 41, 4),
 ('P0021', 42, 3),
 -- Nike Big Kid Court Borough Low Recraft Gs Sneakers (P0022)
-('P0022', 21, 6), 
+('P0022', 21, 6),
 ('P0022', 22, 2),
 ('P0022', 23, 4),
 -- ASICS Gel-Kayano 27 (P0023)
-('P0023', 42, 3), 
+('P0023', 42, 3),
 ('P0023', 43, 3),
 ('P0023', 44, 3),
 -- Reebok Club C 85 (P0024)
@@ -311,7 +311,7 @@ INSERT INTO DETAIL_PRODUK (PRODUK_ID, UKURAN, JUMLAH) VALUES
 
 
 
-INSERT INTO CART (ACCOUNT_ID, NAMA_CART) 
+INSERT INTO CART (ACCOUNT_ID, NAMA_CART)
 SELECT ACCOUNT_ID, CONCAT('cart_', USERNAME) AS NAMA_CART FROM ACCOUNT;
 
 INSERT INTO DETAIL_CART VALUES
@@ -342,7 +342,7 @@ INSERT INTO DETAIL_CART VALUES
 (9,'P0025',23,1);
 
 
-INSERT INTO WISHLIST (ACCOUNT_ID, NAMA_WISHLIST  ) 
+INSERT INTO WISHLIST (ACCOUNT_ID, NAMA_WISHLIST  )
 SELECT ACCOUNT_ID, CONCAT('wishlist_', USERNAME) AS NAMA_CART FROM ACCOUNT;
 
 INSERT INTO DETAIL_WISHLIST VALUES
@@ -372,7 +372,7 @@ INSERT INTO DETAIL_WISHLIST VALUES
 (24, 'P0024'),
 (25, 'P0025');
 
-INSERT INTO `ORDER_TABLE` (`ORDER_ID`, `ACCOUNT_ID`, `TOTAL_HARGA`) VALUES 
+INSERT INTO `ORDER_TABLE` (`ORDER_ID`, `ACCOUNT_ID`, `TOTAL_HARGA`) VALUES
 ('T202405100001', 1, 1700000),
 ('T202405100002', 2, 1500000),
 ('T202405100003', 3, 2000000),
@@ -399,7 +399,7 @@ INSERT INTO `ORDER_TABLE` (`ORDER_ID`, `ACCOUNT_ID`, `TOTAL_HARGA`) VALUES
 ('T202405100024', 24, 1500000),
 ('T202405100025', 25, 100000);
 
-INSERT INTO `DETAIL_ORDER` (`ORDER_ID`, `PRODUK_ID`, `UKURAN`, `JUMLAH`) VALUES 
+INSERT INTO `DETAIL_ORDER` (`ORDER_ID`, `PRODUK_ID`, `UKURAN`, `JUMLAH`) VALUES
 ('T202405100001', 'P0001', '40', 1),
 ('T202405100002', 'P0002', '40', 1),
 ('T202405100003', 'P0003', '42', 1),
@@ -425,3 +425,89 @@ INSERT INTO `DETAIL_ORDER` (`ORDER_ID`, `PRODUK_ID`, `UKURAN`, `JUMLAH`) VALUES
 ('T202405100023', 'P0023', '42', 1),
 ('T202405100024', 'P0024', '41', 1),
 ('T202405100025', 'P0025', '23', 1);
+
+
+drop function if exists fGenProdukId;
+delimiter $$
+CREATE FUNCTION fGenProdukId()
+RETURNS VARCHAR(100) DETERMINISTIC
+BEGIN
+    DECLARE prefix VARCHAR(1) DEFAULT 'P';
+    DECLARE result VARCHAR(10);
+
+    -- Calculate the next available product ID
+    SELECT IFNULL(CONCAT(prefix, LPAD(MAX(SUBSTRING(produk_id, 2)) + 1, 4, '0')), CONCAT(prefix, '0001')) INTO result
+    FROM produk
+    WHERE SUBSTRING(produk_id, 1, 1) = prefix;
+
+    RETURN result;
+END $$
+delimiter ;
+
+drop trigger if exists tInsProdukId;
+delimiter $$
+create trigger tInsProdukId
+before insert
+on Produk
+for each row
+begin
+	SET new.Produk_id=fGenProdukId();
+end $$
+delimiter ;
+
+DELIMITER //
+CREATE PROCEDURE pGetCart (idAccount int)
+BEGIN
+   SELECT CART.ACCOUNT_ID, CART.NAMA_CART, PRODUK.PRODUK_ID, PRODUK.NAMA_PRODUK, DETAIL_CART.UKURAN, PRODUK.IMAGE, PRODUK.HARGA, DETAIL_CART.JUMLAH
+FROM CART
+JOIN `ACCOUNT` ON `ACCOUNT`.ACCOUNT_ID = CART.ACCOUNT_ID AND `ACCOUNT`.ACCOUNT_ID = idAccount
+JOIN DETAIL_CART ON DETAIL_CART.CART_ID = CART.CART_ID
+JOIN PRODUK ON PRODUK.PRODUK_ID = DETAIL_CART.PRODUK_ID
+HAVING DETAIL_CART.JUMLAH > 0;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE pGetWishlist (idAccount int)
+BEGIN
+   SELECT WISHLIST.ACCOUNT_ID, PRODUK.PRODUK_ID, PRODUK.NAMA_PRODUK, PRODUK.IMAGE, PRODUK.HARGA
+FROM WISHLIST
+JOIN `ACCOUNT` ON `ACCOUNT`.ACCOUNT_ID = WISHLIST.ACCOUNT_ID AND `ACCOUNT`.ACCOUNT_ID = idAccount
+JOIN DETAIL_WISHLIST ON DETAIL_WISHLIST.WISHLIST_ID = WISHLIST.WISHLIST_ID
+JOIN PRODUK ON PRODUK.PRODUK_ID = DETAIL_WISHLIST.PRODUK_ID;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE pGetFilterCategory (idCategory int)
+BEGIN
+SELECT PRODUK_ID, IMAGE, NAMA_PRODUK, HARGA
+FROM PRODUK
+where kategori_id = idCategory;
+END //
+DELIMITER ;
+
+
+CREATE VIEW vBEST_SELLING AS
+SELECT
+  p.PRODUK_ID,
+  p.IMAGE,
+  p.NAMA_PRODUK,
+  p.HARGA,
+  SUM(dt.JUMLAH) AS JUMLAH
+FROM PRODUK p
+JOIN DETAIL_ORDER dt ON p.PRODUK_ID = dt.PRODUK_ID
+GROUP BY p.PRODUK_ID
+ORDER BY JUMLAH DESC
+LIMIT 8;
+
+CREATE VIEW vLATEST AS
+SELECT
+  p.PRODUK_ID,
+  p.IMAGE,
+  p.NAMA_PRODUK,
+  p.HARGA
+FROM PRODUK p
+ORDER BY 1 DESC
+LIMIT 8;
