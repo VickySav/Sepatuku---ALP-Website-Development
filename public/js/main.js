@@ -237,8 +237,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response) {
-                location.reload();
-
+                window.location.href = '/shop';
             },
             error: function(xhr) {
                 console.log(xhr);
@@ -261,8 +260,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function(response) {
-                location.reload();
-
+                window.location.href = '/shop';
             },
             error: function(xhr) {
                 console.log(xhr);

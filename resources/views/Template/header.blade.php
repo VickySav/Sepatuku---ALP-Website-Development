@@ -93,9 +93,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>
-                                <li class="nav-item" id="shop"><a class="nav-link" href="/shop">Shop</a></li>
-                                <li class="nav-item" id="contact"><a class="nav-link" href="/contact">Contact</a></li>
-                            </ul>
+                                <li class="nav-item" id="shop"><a class="nav-link" href="/shop">Shop</a></li>                            </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="nav-item"><input type="hidden"></li>
                                 <li class="nav-item" id="cart"><a href="/cart" class="cart"><span class="ti-bag"></span></a></li>
@@ -118,7 +116,6 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="nav-item">

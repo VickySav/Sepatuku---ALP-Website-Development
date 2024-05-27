@@ -10,14 +10,21 @@ class CategoryController extends Controller
 {
     public function ShowCategory()
     {
-        if (session()->has('KATEGORI_ID')){
+        if (session()->has('KATEGORI_ID') && !session()->has('BRAND')) {
+            if (session()->has('BRAND')){
+                session()->pull('BRAND');
+            }
             $id = session('KATEGORI_ID');
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('KATEGORI_ID', '=', $id)
             ->paginate(9);
-            session()->pull('KATEGORI_ID');
+            // session()->pull('KATEGORI_ID');
+
         } else if (session()->has('BRAND')){
+            if (session()->has('KATEGORI_ID')){
+                session()->pull('KATEGORI_ID');
+            }
             $brand = session('BRAND');
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
@@ -29,7 +36,7 @@ class CategoryController extends Controller
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->paginate(9);
         }
-        // dd($dataProducts);
+
         $categories = $this->getCategories();
         return view("category", [
             "dataProducts" => $dataProducts,

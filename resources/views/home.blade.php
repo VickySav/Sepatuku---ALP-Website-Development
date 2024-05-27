@@ -187,13 +187,13 @@
 						</div>
 					</div>
 				</div>
-                @include('Template.alert')
 				<div class="row">
 					<!-- single product -->
                     @foreach ($newProduct as $produk)
                     @php
                         $nameStrip = str($produk->NAMA_PRODUK)->replace(' ', '-');
                     @endphp
+                    @if (Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
                     <div class="col-lg-3 col-md-6">
 						<div class="single-product">
                             <a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}">
@@ -218,6 +218,26 @@
 								</div>
 							</div>
 						</div>
+                        @else
+                        <div class="col-lg-3 col-md-6">
+                            <div class="single-product">
+                                <a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}">
+                                <img class="img-fluid" src="{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
+                                </a>
+                                <div class="product-details">
+                                    <h6>{{ $produk->NAMA_PRODUK}}</h6>
+                                    <div class="price">
+                                        <p style="font-weight: 100;"> Rp {{ number_format($produk->HARGA, 0, ',', '.') }} </p>
+                                    </div>
+                                    <div class="prd-bottom">
+                                        <a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}" class="social-info">
+                                            <span class="ti-bag"></span>
+                                            <p class="hover-text">Add to cart</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 					</div>
                     @endforeach
 
