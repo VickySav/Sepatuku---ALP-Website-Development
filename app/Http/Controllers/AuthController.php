@@ -77,11 +77,11 @@ class AuthController extends Controller
     }
     public function PostRegister(Request $request){
         $validatedData = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|min:8',
-            'address' => 'required',
+            'username' => 'required|max:50',
+            'password' => 'required|min:5',
+            'email' => 'required|email|max:50',
+            'phone' => 'required|min:8|max:15',
+            'address' => 'required|max:100',
         ]);
         $insert = DB::table('ACCOUNT')->insert([
             'USERNAME' => $validatedData['username'],
