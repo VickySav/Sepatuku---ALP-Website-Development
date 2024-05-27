@@ -82,7 +82,284 @@ $(document).ready(function(){
       nav:false,
       dots:true
     });
-    
+
+    $('.btn-size').click(function() {
+        var stock = $(this).data('jumlah');
+        $( this ).toggleClass( "active" );
+        $('button').removeClass('selected');
+        $(this).addClass('selected');
+        $('.stock').text('Stock: ' + stock).show();
+        $('.prod-qty').val(1);
+    });
+
+
+    /*=================================
+    Javascript for CART & WISHLIST
+    ==================================*/
+     $('.cart-qty').click(function() {
+        var id = $(this).data('id');
+        var size = $(this).data('size');
+        var cartValue = ($(this).val());
+        var route = $(this).data('route');
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                size: size,
+                cart: cartValue,
+                _token: token
+            },
+            success: function(response) {
+                console.log(response);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+    });
+
+    $('.cart-qty').change(function() {
+        var id = $(this).data('id');
+        var size = $(this).data('size');
+        var cartValue = ($(this).val());
+        var route = $(this).data('route');
+        $('.qty').text(cartValue).show();
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                size: size,
+                cart: cartValue,
+                _token: token
+            },
+            success: function(response) {
+                console.log(response);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+
+    });
+
+    $('.cart-trash').click(function() {
+        var id = $(this).data('id');
+        var size = $(this).data('size');
+        var route = $(this).data('route');
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                size: size,
+                _token: token
+            },
+            success: function(response) {
+                alert(response.message);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+
+    });
+
+    $('.wishlist-trash').click(function() {
+        var id = $(this).data('id');
+        var route = $(this).data('route');
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                _token: token
+            },
+            success: function(response) {
+                alert(response.message);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+
+    });
+
+ /*=================================
+    Javascript for SHOP
+    ==================================*/
+
+    $('.kategoriShop').click(function() {
+        var id = $(this).data('id');
+        var route = $(this).data('route');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                _token: token
+            },
+            success: function(response) {
+                window.location.href = '/shop';
+            },
+            error: function(xhr) {
+                console.log(xhr);
+                // Handle errors
+            }
+        })
+    });
+
+    $('.clearKategori').click(function() {
+        var route = $(this).data('route');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                _token: token
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(xhr) {
+                console.log(xhr);
+                // Handle errors
+            }
+        })
+    });
+
+    // INI
+
+    $('.filter-list').click(function() {
+        var brand = $(this).data('brand');
+        var route = $(this).data('route');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                brand:brand,
+                _token: token
+            },
+            success: function(response) {
+                location.reload();
+
+            },
+            error: function(xhr) {
+                console.log(xhr);
+                // Handle errors
+            }
+        })
+    });
+
+ /*=================================
+    Javascript for ADD TO CART AND WISHLIST
+    ==================================*/
+    $('.add-cart').click(function() {
+        var id = $(this).data('id');
+        var size = $('.btn-size.selected').data('ukuran');
+        var qty = $('.prod-qty').val();
+        var route = $(this).data('route');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                size: size,
+                qty: qty,
+                _token: token
+            },
+            success: function(response) {
+                alert(response.message);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+    });
+
+
+    $('.lnr-heart').click(function() {
+        var id = $(this).data('id');
+        var route = $(this).data('route');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: route,
+            type: "POST",
+            data: {
+                id: id,
+                _token: token
+            },
+            success: function(response) {
+                alert(response.message);
+                // Handle success, e.g., display a success message
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Handle errors
+            }
+        })
+    });
+
+
+    $('.prod-qty').click(function() {
+        var jumlah = $('.btn-size.selected').data('jumlah');
+        $(this).attr('max', jumlah);
+    });
+
+    $('.prod-qty').change(function() {
+        var simpanAngka = $(this).val();
+        var jumlah = $('.btn-size.selected').data('jumlah');
+        if(simpanAngka == 0)
+        {
+            $('.prod-qty').val(1);
+        } else if(simpanAngka > jumlah)
+        {
+            $('.prod-qty').val(jumlah);
+        }
+
+        $(this).attr('max', jumlah);
+    });
+
+     /*=================================
+    Javascript for SEARCH
+    ==================================*/
+    // $('.search').click(function() {
+    //     alert('ada');
+    //     var simpanAngka = $(this).val();
+    //     var jumlah = $('.btn-size.selected').data('jumlah');
+    //     if(simpanAngka == 0)
+    //     {
+    //         $('.prod-qty').val(1);
+    //     } else if(simpanAngka > jumlah)
+    //     {
+    //         $('.prod-qty').val(jumlah);
+    //     }
+
+    //     $(this).attr('max', jumlah);
+    // });
     /*=================================
     Javascript for exclusive area carousel
     ==================================*/
@@ -112,8 +389,8 @@ $(document).ready(function(){
     .click(function(event) {
       // On-page links
       if (
-        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-        && 
+        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+        &&
         location.hostname == this.hostname
       ) {
         // Figure out element to scroll to
@@ -180,7 +457,7 @@ $(document).ready(function(){
 
     $(document).ready(function() {
         $('#mc_embed_signup').find('form').ajaxChimp();
-    });   
+    });
 
 
 
@@ -249,9 +526,9 @@ $(document).ready(function(){
     $(function(){
 
         if(document.getElementById("price-range")){
-        
+
         var nonLinearSlider = document.getElementById('price-range');
-        
+
         noUiSlider.create(nonLinearSlider, {
             connect: true,
             behaviour: 'tap',
@@ -282,7 +559,7 @@ $(document).ready(function(){
 
     });
 
-    
+
     //-------- Have Cupon Button Text Toggle Change -------//
 
     $('.have-btn').on('click', function(e){
@@ -298,7 +575,7 @@ $(document).ready(function(){
         $('.load-product').fadeIn('slow');
         $(this).fadeOut();
     });
-    
+
 
 
 
@@ -559,7 +836,8 @@ $(document).ready(function(){
         });
       }
 
-
-  
-
  });
+
+
+
+

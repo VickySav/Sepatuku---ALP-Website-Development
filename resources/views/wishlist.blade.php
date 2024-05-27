@@ -7,7 +7,10 @@
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
                 <h1>Wishlist</h1>
-
+                <nav class="d-flex align-items-center">
+                    <a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="/wishlist">Wishlist</a>
+                </nav>
             </div>
         </div>
     </div>
@@ -26,36 +29,38 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- PRODUK WISHLIST DRI DATABASE --}}
+                        @foreach ($dataWishlist as $wishlist)
                         <tr>
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="img/category/c3.jpg" width= 100 alt="">
+                                        <img src="{{ $wishlist->IMAGE }}" style="width: 100px; height:100px; object-fit:cover;" alt="">
                                     </div>
                                     <div class="media-body">
-                                        <p>Nike Air</p>
+                                        <p>{{ $wishlist->NAMA_PRODUK }}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <h5>$360.00</h5>
+                                <h5>Rp {{ number_format($wishlist->HARGA, 0, ',', '.') }}</h5>
                             </td>
 
                             <td>
-                                <a class="delete"><span class="ti-trash"></span></a>
+                                <a class="delete" href="/wishlist"><span class="ti-trash wishlist-trash" data-route="{{ route('deleteWishlist') }}"data-id="{{ $wishlist->PRODUK_ID }}"></span></a>
                             </td>
                         </tr>
+                        @endforeach
+                        {{-- PRODUK WISHLIST DRI DATABASE --}}
                         <tr class="out_button_area">
-
+                            <td>
+                            </td>
                             <td>
 
                             </td>
-                    <td>
-                        
-                    </td>
                             <td>
                                 <div class="checkout_btn_inner float-right d-flex align-items-center">
-                                    <a class="primary-btn" href="#">Continue Shopping</a>
+                                    <a class="primary-btn" href="/shop">Continue Shopping</a>
                                 </div>
                             </td>
                         </tr>

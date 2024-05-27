@@ -16,7 +16,7 @@
 								<input type="password" class="form-control" id="password" name="password" placeholder="New password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="primary-btn" href = "/home">Continue</button>
+								<button type="submit" value="submit" class="primary-btn" href = "/">Continue</button>
 							</div>
 						</form>
 					</div>
