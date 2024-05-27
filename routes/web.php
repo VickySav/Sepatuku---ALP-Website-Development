@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactController;
+use App\Http\Middleware\ShouldAdminMiddleware;
 
 
 Route::get("/login", [AuthController::class,"ShowLogin"]);
@@ -30,9 +31,14 @@ Route::get('/wishlist', [WishlistController::class,'ShowWishlist']);
 
 Route::get('/contact', [ContactController::class,'ShowContact']);
 
-Route::prefix('/admin')->group(function () {
-    Route::get('/transaction', [AdminController::class,'ShowTransaction']);
-    Route::get('/manageproduct',  [AdminController::class,'ShowCatalog']);
+
+Route::middleware([ShouldAdminMiddleware::class])->group(function() {
+    Route::prefix('/admin')->group(function () {
+        Route::get('/transaction', [AdminController::class,'ShowTransaction']);
+        Route::get('/manageproduct',  [AdminController::class,'ShowCatalog']);
+        Route::post('/manageproduct/add',  [AdminController::class,'AddNewProduct'])->name("AddNewProduct");
+        Route::post('/manageproduct/edit',  [AdminController::class,'EditProduct'])->name("EditProduct");
+    });
 });
 // Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');

@@ -425,3 +425,32 @@ INSERT INTO `DETAIL_ORDER` (`ORDER_ID`, `PRODUK_ID`, `UKURAN`, `JUMLAH`) VALUES
 ('T202405100023', 'P0023', '42', 1),
 ('T202405100024', 'P0024', '41', 1),
 ('T202405100025', 'P0025', '23', 1);
+
+
+drop function if exists fGenProdukId;
+delimiter $$
+CREATE FUNCTION fGenProdukId()
+RETURNS VARCHAR(100) DETERMINISTIC
+BEGIN
+    DECLARE prefix VARCHAR(1) DEFAULT 'P';
+    DECLARE result VARCHAR(10);
+    
+    -- Calculate the next available product ID
+    SELECT IFNULL(CONCAT(prefix, LPAD(MAX(SUBSTRING(produk_id, 2)) + 1, 4, '0')), CONCAT(prefix, '0001')) INTO result
+    FROM produk
+    WHERE SUBSTRING(produk_id, 1, 1) = prefix;
+
+    RETURN result;
+END $$
+delimiter ;
+
+drop trigger if exists tInsProdukId;
+delimiter $$
+create trigger tInsProdukId
+before insert
+on Produk
+for each row
+begin
+	SET new.Produk_id=fGenProdukId();
+end $$
+delimiter ;
