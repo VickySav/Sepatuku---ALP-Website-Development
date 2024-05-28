@@ -112,7 +112,7 @@
 						<div class="col-lg-8 col-md-8">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c1.jpg" alt="">
+								<img class="img-fluid w-100" src="/assets/for-sport.png" style="height:191.49px" alt="">
 								<a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Sneaker for Sports</h6>
@@ -123,7 +123,7 @@
 						<div class="col-lg-4 col-md-4">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c2.jpg" alt="">
+								<img class="img-fluid w-100" src="/assets/1-1.jpg" style="height:191.78px" alt="">
 								<a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Sneaker for Sports</h6>
@@ -134,7 +134,7 @@
 						<div class="col-lg-4 col-md-4">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c3.jpg" alt="">
+								<img class="img-fluid w-100" src="/assets/product-couple.jpg" style="height:191.78px" alt="">
 								<a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Product for Couple</h6>
@@ -158,7 +158,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-deal">
 						<div class="overlay"></div>
-						<img class="img-fluid w-100" src="img/category/c5.jpg" alt="">
+						<img class="img-fluid w-100" src="/assets/Adidas-Samba.jpg" style="height:413.9px" alt="">
 						<a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
 							<div class="deal-details">
 								<h6 class="deal-title">Sneaker for Sports</h6>
@@ -178,12 +178,10 @@
 		<div class="single-product-slider">
 			<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
+					<div class="col-lg-10 text-center">
 						<div class="section-title">
 							<h1>Latest Products</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<p>Step into style with our newest sneaker arrivals! Our latest collection features innovative designs, premium materials, and unparalleled comfort. From sleek and sporty to bold and trendy, find the perfect pair to elevate your sneaker game. Shop now and experience the ultimate in fashion and functionality!</p>
 						</div>
 					</div>
 				</div>
@@ -248,12 +246,10 @@
 		<div class="single-product-slider">
 			<div class="container">
 				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
+					<div class="col-lg-10 text-center">
 						<div class="section-title">
 							<h1>Best Sellers</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<p>Explore our top-selling sneakers, loved by our customers for their exceptional style and comfort. These popular picks combine cutting-edge design with high-performance features, making them must-haves for any sneaker enthusiast. Shop our best sellers now and see why they're everyone's favorites!</p>
 						</div>
 					</div>
 				</div>
@@ -286,7 +282,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 					@else
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
@@ -308,7 +304,7 @@
 						</div>
 						@endif
 					</div>
-                    
+
 					@endforeach
 
 				</div>
@@ -321,20 +317,20 @@
 	<section class="brand-area section_gap">
 		<div class="container">
 			<div class="row">
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/1.png" alt="">
+				<a class="col single-img">
+					<img class="img-fluid d-block mx-auto" src="/assets/nike-logo.png" alt="" style="width:100px">
 				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/2.png" alt="">
+				<a class="col single-img">
+					<img class="img-fluid d-block mx-auto" src="/assets/adidas-logo.png" alt="" style="width:100px">
 				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/3.png" alt="">
+				<a class="col single-img">
+					<img class="img-fluid d-block mx-auto" src="/assets/reebok-logo.png" alt="" style="width:100px">
 				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/4.png" alt="">
+				<a class="col single-img">
+					<img class="img-fluid d-block mx-auto" src="/assets/puma-logo.png" alt="" style="width:100px">
 				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/5.png" alt="">
+				<a class="col single-img">
+					<img class="img-fluid d-block mx-auto" src="/assets/converse-logo.png" alt="" style="width:100px">
 				</a>
 			</div>
 		</div>

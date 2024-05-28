@@ -58,11 +58,10 @@
 						<div class="card_area d-flex align-items-center">
                             @if (Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
 							<a style = "color:white" class="primary-btn add-cart" data-id ="{{ $product->PRODUK_ID }}" data-route="{{ route('addCart') }}">Add to Cart</a>
+                            <a class="icon_btn" ><i class="lnr lnr lnr-heart" data-id ="{{ $product->PRODUK_ID }}" data-route="{{ route('addWishlist') }}"></i></a>
                             @else
 							<a style = "color:white" class="primary-btn" href="/login">Shop Now</a>
-
                             @endif
-							<a class="icon_btn" ><i class="lnr lnr lnr-heart" data-id ="{{ $product->PRODUK_ID }}" data-route="{{ route('addWishlist') }}"></i></a>
 						</div>
 					</div>
 				</div>

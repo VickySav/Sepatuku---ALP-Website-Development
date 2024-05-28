@@ -11,6 +11,7 @@ class HomeController extends Controller
 
     public function ShowHome()
     {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
         $newestProducts = $this->newestProducts();
         $bestSellling = $this->bestSellingProducts();
         return view("home",[
@@ -20,6 +21,7 @@ class HomeController extends Controller
     }
     public function ShowProductDetails(string $id)
     {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
         $dataProduct = $this->getProduct($id);
         $product = $dataProduct->first();
         return view("product-details", [
