@@ -89,7 +89,7 @@
 							<div class="single-product">
 								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="{{$produk->IMAGE}}" alt=""> </a>
 								<div class="product-details">
-									<h6>{{ $produk->NAMA_PRODUK }}</h6>
+									<h6 style="height: 57.56px">{{ $produk->NAMA_PRODUK }}</h6>
 									<div class="price">
 										<h6>Rp  Rp {{ number_format($produk->HARGA, 0, ',', '.') }}</h6>
 									</div>

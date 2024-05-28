@@ -70,7 +70,14 @@
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="number" style="width:80px" min=1 max=99 data-id="{{ $cart->PRODUK_ID }}" data-harga = "{{ $cart->HARGA }}" data-size= "{{ $cart->UKURAN }}" data-route="{{ route('updateCart') }}" name="qty" id="sst-{{ $cart->PRODUK_ID }}" maxlength="2" value="{{ $cart->JUMLAH }}" title="Quantity:" class="input-text cart-qty">
+                                        @php
+                                            $stock = DB::table('DETAIL_PRODUK')
+                                            ->select('JUMLAH')
+                                            ->where('PRODUK_ID', '=', $cart->PRODUK_ID)
+                                            ->where('UKURAN','=', $cart->UKURAN)
+                                            ->first();
+                                        @endphp
+                                        <input type="number" style="width:80px" min=1 max= {{$stock->JUMLAH}}  data-id="{{ $cart->PRODUK_ID }}" data-harga = "{{ $cart->HARGA }}" data-size= "{{ $cart->UKURAN }}" data-route="{{ route('updateCart') }}" name="qty" id="sst-{{ $cart->PRODUK_ID }}" maxlength="2" value="{{ $cart->JUMLAH }}" title="Quantity:" class="input-text cart-qty">
                                 </div>
                                 </td>
                                 <td>
@@ -80,38 +87,15 @@
 
                                 <td>
 
-                                    <a class="delete" href="/cart"><span class="ti-trash cart-trash" data-id="{{ $cart->PRODUK_ID }}" data-size = "{{ $cart->UKURAN }}" data-route="{{ route('deleteCart') }}"></span></a>
+                                    <a class="delete" href="/cart"><span class="ti-trash cart-trash" data-id="{{ $cart->PRODUK_ID }}" data-size = "{{ $cart->UKURAN }}" data-route="{{ route('deleteCart') }}" data-price="{{$cart->HARGA}}"></span></a>
 
                                 </td>
 
-
+          
                             </tr>
-
                             @endforeach
                              <!--================ Foreach dri Database =================-->
-                            <tr>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <h5>Subtotal</h5>
-                                </td>
-                                <td>
-                                    <h5>$2160.00</h5>
-                                </td>
-                            </tr>
+                            
                             <tr class="out_button_area">
                                 <td>
 
@@ -134,7 +118,7 @@
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
                                         <a class="gray_btn" href="/shop">Continue Shopping</a>
-                                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                                        <a class="primary-btn" data-toggle="modal" data-target="#checkoutModal" id="checkout">Proceed to checkout</a>
                                     </div>
                                 </td>
                             </tr>
@@ -143,6 +127,27 @@
                 </div>
             </div>
         </div>
+        
+        <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" id ="modalcenter">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="checkoutModalLabel">Checkout Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                 <h5 id = "grandTotal">Grand Total : Rp </h5>
+                  <p id="checkoutText">Are you sure to checkout your products?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to cart</button>
+                    @csrf <button type="button" class="btn btn-primary" data-route="{{ route('addOrder') }}">Yes, checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
     @else
     <section class="cart_area">
@@ -157,8 +162,82 @@
             </div>
         </div>
     </section>
-
     @endif
+    <script>
+        $(document).ready(function() {
+            // Disable the "Proceed to checkout" button by default
+            $('.primary-btn').prop('disabled', true);
+        
+            // Listen for changes on the checkboxes
+            $('.cart-checkbox').change(function() {
+                // If at least one checkbox is selected
+                if ($('.cart-checkbox:checked').length > 0) {
+                    // Enable the "Proceed to checkout" button
+                    $('.primary-btn').prop('disabled', false);
+                    
+                } else {
+                    // Otherwise, disable the "Proceed to checkout" button
+                    $('.primary-btn').prop('disabled', true);
+                }
+            });
+            $('#checkout').click(function(){
+                var grandtotal = 0
+                $('.cart-checkbox:checked').each(function() {
+                    var row = $(this).closest('tr');
+                    var qty = parseInt(row.find('.cart-qty').val());
+                    var price = row.find('.cart-trash').data('price');
+                    grandtotal += (price *qty);
+                });
+                $("#grandTotal").text("Grand Total : Rp  " + grandtotal.toLocaleString("id-ID"));
+            });
+    $(".btn.btn-primary").click(function() {
+    var selectedProducts = [];
+    var route = $(this).data("route");
+    // Collect selected product data efficiently
+    $('.cart-checkbox:checked').each(function() {
+      var row = $(this).closest('tr');
+      selectedProducts.push({
+        id: row.find('.cart-trash').data('id'),
+        size: row.find('.cart-trash').data('size'),
+        qty: parseInt(row.find('.cart-qty').val()),
+        price: row.find('.cart-trash').data('price')
+      });
+    });
+    
+    if (selectedProducts.length === 0) {
+      alert("Please select at least one product to checkout.");
+      return false;  // Prevent form submission if no products selected
+    }
+
+    // Submit AJAX request with CSRF token and selected products
+    $.ajax({
+      url: route,  // Replace with your actual route URL
+      type: 'POST',
+      data: {
+        _token: $('meta[name="csrf-token"]').attr("content"),
+        products: selectedProducts
+      },
+      success: function(response) {
+        alert("Success:", response);
+        selectedProducts.forEach(element => {
+            console.log(element);
+        });
+        // Handle successful order submission (e.g., redirect to order confirmation page)
+      },
+      error: function(xhr) {
+       console.error("Error:", xhr.responseText)
+        selectedProducts.forEach(element => {
+            console.log(element);
+        });
+        //alert("An error occurred while processing your order. Please try again later.");
+      }
+    });
+  });
+
+
+        });
+        </script>
+        
     <!--================End Cart Area =================-->
 </body>
 @endsection
