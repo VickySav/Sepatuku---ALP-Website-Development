@@ -259,14 +259,8 @@ $(document).ready(function () {
             data: {
                 _token: token,
             },
-<<<<<<< Updated upstream
-            success: function(response) {
-                location.reload();
-
-=======
             success: function (response) {
-                window.location.href = "/shop";
->>>>>>> Stashed changes
+                location.reload();
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -288,14 +282,8 @@ $(document).ready(function () {
                 brand: brand,
                 _token: token,
             },
-<<<<<<< Updated upstream
-            success: function(response) {
-                location.reload();
-
-=======
             success: function (response) {
-                window.location.href = "/shop";
->>>>>>> Stashed changes
+                location.reload();
             },
             error: function (xhr) {
                 console.log(xhr);
