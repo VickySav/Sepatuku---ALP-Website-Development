@@ -36,7 +36,7 @@ Route::get('/checkout', [CheckoutController::class,'ShowCheckout']);
 Route::get('/cart', [CartController::class,'ShowCart']);
 Route::post('/cart/update', [CartController::class,'updateCart'])->name('updateCart');
 Route::post('/cart/delete', [CartController::class,'deleteCart'])->name('deleteCart');
-
+Route::post('/cart', [CartController::class,'addOrder'])->name('addOrder');
 // Route::post('/cart', [CartController::class,'deleteCart'])->name('deleteCart');
 
 
@@ -58,5 +58,3 @@ Route::middleware([ShouldAdminMiddleware::class])->group(function() {
 // Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');
 //Route::view('/tracking', 'tracking');
-
-

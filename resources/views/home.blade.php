@@ -282,7 +282,6 @@
 								</div>
 							</div>
 						</div>
-
 					@else
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
@@ -304,7 +303,6 @@
 						</div>
 						@endif
 					</div>
-
 					@endforeach
 
 				</div>
