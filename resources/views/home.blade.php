@@ -192,7 +192,7 @@
 					<!-- single product -->
                     @foreach ($newProduct as $produk)
                     @php
-                        $nameStrip = str($produk->NAMA_PRODUK)->replace(' ', '-');
+                        $nameStrip = str($produk->NAMA_PRODUK)->replace('', '-');
                     @endphp
                     <div class="col-lg-3 col-md-6">
 						<div class="single-product">
