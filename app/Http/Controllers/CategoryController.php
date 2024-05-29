@@ -10,28 +10,29 @@ class CategoryController extends Controller
 {
     public function ShowCategory()
     {
-        if (session()->has('KATEGORI_ID') && !session()->has('BRAND')) {
-            if (session()->has('BRAND')){
-                session()->pull('BRAND');
-            }
+        if (session()->has('KATEGORI_ID')) {
             $id = session('KATEGORI_ID');
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('KATEGORI_ID', '=', $id)
             ->paginate(9);
-            // session()->pull('KATEGORI_ID');
-
         } else if (session()->has('BRAND')){
-            if (session()->has('KATEGORI_ID')){
-                session()->pull('KATEGORI_ID');
-            }
             $brand = session('BRAND');
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('NAMA_PRODUK', 'like', '%' . $brand . '%')
             ->paginate(9);
-            session()->pull('BRAND');
-        }else{
+        }else if(session()->has('MINPRICE') || session()->has('MAXPRICE')){
+            $MINPRICE = session('MINPRICE');
+            $MAXPRICE = session('MAXPRICE');
+            $dataProducts = DB::table('produk')
+            ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
+            ->where('HARGA', '>=', $MINPRICE)
+            ->where('HARGA', '<=', $MAXPRICE)
+            ->paginate(9);
+
+
+        } else{
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->paginate(9);
@@ -52,29 +53,49 @@ class CategoryController extends Controller
     }
 
     public function filterCategory(Request $request){
+        // CLEAR SEMUA SESSION
+        session()->pull('KATEGORI_ID');
+        session()->pull('BRAND');
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+
         $id = $request->input('id');
-        if (session()->has('KATEGORI_ID')){
-            session()->pull('KATEGORI_ID');
-        }
         $request->session()->put('KATEGORI_ID', $id);
     }
 
     public function clearFilter(){
-        if (session()->has('KATEGORI_ID')){
-            session()->pull('KATEGORI_ID');
-        }
+        session()->pull('KATEGORI_ID');
+        session()->pull('BRAND');
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
     }
 
     public function filterBrand(Request $request){
+        // CLEAR SEMUA SESSION
+        session()->pull('KATEGORI_ID');
+        session()->pull('BRAND');
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+
         $brand = $request->input('brand');
-        if (session()->has('BRAND')){
-            session()->pull('BRAND');
-        }
         $request->session()->put('BRAND', $brand);
     }
 
     public static function getRandomProducts(){
         $products = collect(DB::select('select * from vRandomProducts'));
         return $products;
+    }
+
+    public function filterPrice(Request $request){
+        session()->pull('KATEGORI_ID');
+        session()->pull('BRAND');
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+
+        $minPrice = $request->input('minPrice');
+        $maxPrice = $request->input('maxPrice');
+
+        $request->session()->put('MINPRICE', $minPrice);
+        $request->session()->put('MAXPRICE', $maxPrice);
     }
 }

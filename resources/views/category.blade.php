@@ -48,20 +48,20 @@
 
 							</ul>
                             <div class="head">Price</div>
-                            <ul>
-                                <form class="form-inline">
+                            <div class="head">
+
                                     <div class="form-group mr-2">
-                                        <label for="input1" class="sr-only">Input 1</label>
-                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                        <input type="text" class="form-control form-control-sm small-input minPrice" id="rupiah1" placeholder="MIN" style="width: 150px;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="input2" class="sr-only">Input 2</label>
-                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                        <input type="text" class="form-control form-control-sm small-input maxPrice" id="rupiah2" placeholder="MAX" style="width: 150px;">
                                     </div>
-                                </form>
-                            <ul>
-                           <br> <br> <br>
-					</div>
+
+                            </ul>
+                                <button type="button" class="btn btn-secondary btn-apply" data-route="{{ route('filterPrice', ['minPrice' => 0, 'maxPrice' => 0]) }}" style="padding: 5px 10px; font-size: 12px; margin: 5px;"> Apply </button> </div>
+
+                            <br>
+                        </div>
 				</div>
 			</div>
 			<div class="col-xl-9 col-lg-8 col-md-7">
@@ -178,79 +178,35 @@
 	</section>
 	<!-- End related-product Area -->
 
-
-	<!-- Modal Quick Product View -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="container relative">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<div class="product-quick-view">
-					<div class="row align-items-center">
-						<div class="col-lg-6">
-							<div class="quick-view-carousel">
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="quick-view-content">
-								<div class="top">
-									<h3 class="head">Mill Oil 1000W Heater, White</h3>
-									<div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
-									<div class="category">Category: <span>Household</span></div>
-									<div class="available">Availibility: <span>In Stock</span></div>
-								</div>
-								<div class="middle">
-									<p class="content">Mill Oil is an innovative oil filled radiator with the most modern technology. If you are
-										looking for something that can make your interior look awesome, and at the same time give you the pleasant
-										warm feeling during the winter.</p>
-									<a href="#" class="view-full">View full Details <span class="lnr lnr-arrow-right"></span></a>
-								</div>
-								<div class="bottom">
-									<div class="color-picker d-flex align-items-center">Color:
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-									</div>
-									<div class="quantity-container d-flex align-items-center mt-15">
-										Quantity:
-										<input type="text" class="quantity-amount ml-15" value="1" />
-										<div class="arrow-btn d-inline-flex flex-column">
-											<button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
-											<button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
-										</div>
-
-									</div>
-									<div class="d-flex mt-20">
-										<a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
-										<a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
-										<a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
     <script>
-       var rupiah = document.getElementById('rupiah');
-		rupiah.addEventListener('keyup', function(e){
+       var rupiah1 = document.getElementById('rupiah1');
+       var rupiah2 = document.getElementById('rupiah2');
+
+       let minPrice=0;
+       let maxPrice=0;
+		rupiah1.addEventListener('keyup', function(e){
 			// tambahkan 'Rp.' pada saat form di ketik
 			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-			rupiah.value = formatRupiah(this.value, 'Rp. ');
+            // if(this.classList.contains("minPrice")){
+
+            // } else if(this.classList.contains("maxPrice")){
+            //     maxPrice = this.value;
+            // }
+            minPrice = this.value.replace(/\D/g, '');
+			rupiah1.value = formatRupiah(this.value, 'Rp. ');
+		});
+
+        rupiah2.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            // if(this.classList.contains("minPrice")){
+            //     minPrice = this.value;
+            // } else if(this.classList.contains("maxPrice")){
+            //     maxPrice = this.value;
+            // }
+
+            maxPrice = this.value.replace(/\D/g, '');
+			rupiah2.value = formatRupiah(this.value, 'Rp. ');
 		});
 
 		/* Fungsi formatRupiah */
@@ -270,5 +226,39 @@
 			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
 			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 		}
+
+
+    $(document).ready(function () {
+        $(".btn-apply").click(function () {
+            if (maxPrice === 0 || minPrice === 0)
+            {
+                alert('Please fill the minimum/maximum price first');
+            } else
+            {
+                var route = $(this).data("route");
+                var token = $('meta[name="csrf-token"]').attr("content");
+                $.ajax({
+                    url: route,
+                    type: "POST",
+                    data: {
+                        minPrice: minPrice,
+                        maxPrice: maxPrice,
+                        _token: token,
+                    },
+                    success: function (response) {
+                        alert('SUKSES');
+                        window.location.href = `/shop/${minPrice}-${maxPrice}`;
+
+                        // Handle success, e.g., display a success message
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        // Handle errors
+                    },
+                });
+            }
+
+        });
+    });
     </script>
 @endsection

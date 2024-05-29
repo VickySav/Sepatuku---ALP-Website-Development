@@ -9,13 +9,17 @@ class CartController extends Controller
     public function ShowCart()
     {
         session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        session()->pull('BRAND');// PENTING !! BUAT HAPUS BRAND SUPAYA G NGEBUG
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+        
         $userID = HomeController::getUserID();
         $dataCart = $this->getCart($userID);
         $cartid = DB::table('CART')
                     ->select('CART_ID')
                     ->where('ACCOUNT_ID', '=', $userID)
                     ->value('CART_ID');
-                
+
         return view("Cart", [
             "dataCart" => $dataCart,
         ]);
@@ -157,9 +161,9 @@ class CartController extends Controller
     }
 
     }
-    // public function addOrder() 
+    // public function addOrder()
     // {
-        
+
     //     $products = $_POST['products'];
     //     $userID = HomeController::getUserID();
     //     $cartid = DB::table('CART')
@@ -177,13 +181,13 @@ class CartController extends Controller
     //         'TOTAL_HARGA' => $subtotal
 
     //     ]);
-    //     foreach ($products as $product) 
+    //     foreach ($products as $product)
     //     {
     //         $id = $product['id'];
     //         $size = $product['size'];
     //         $qty = $product['qty'];
     //         $price = $product['price'];
-            
+
     //         $addorder = DB::table('DETAIL_ORDER')
     //         ->INSERT([
     //             'ORDER_ID' => $orderid,
@@ -225,7 +229,7 @@ class CartController extends Controller
     ->where('UKURAN', '=', $product['size'])
     ->where('CART_ID', '=', $cartid)
     ->delete();
-    }   
+    }
 
 
 }

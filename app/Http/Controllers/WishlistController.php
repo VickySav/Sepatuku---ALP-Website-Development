@@ -9,6 +9,10 @@ class WishlistController extends Controller
     public function ShowWishlist()
     {
         session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        session()->pull('BRAND');// PENTING !! BUAT HAPUS BRAND SUPAYA G NGEBUG
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+        
         $userID = HomeController::getUserID();
         $dataWishlist = $this->getWishlist($userID);
         return view("Wishlist", [

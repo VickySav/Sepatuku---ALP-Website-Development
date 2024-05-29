@@ -30,6 +30,9 @@ Route::get('/shop/{kategori}', [CategoryController::class, 'ShowCategory']);
 Route::post('/shop/filter', [CategoryController::class, 'filterCategory'])->name('filterCategory');
 Route::post('/shop/clearFilter', [CategoryController::class, 'clearFilter'])->name('clearFilter');
 Route::post('/shop/brand', [CategoryController::class, 'filterBrand'])->name('filterBrand');
+Route::post('/shop/{minPrice}-{maxPrice}', [CategoryController::class, 'filterPrice'])->name('filterPrice');
+// Route::post('/shop/a', [CategoryController::class, 'filterPrice'])->name('filterPrice');
+
 
 
 Route::get('/checkout', [CheckoutController::class,'ShowCheckout']);
