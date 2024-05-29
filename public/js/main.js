@@ -231,6 +231,7 @@ $(document).ready(function () {
 
     $(".kategoriShop").click(function () {
         var id = $(this).data("id");
+        var kategori = $(this).data("kategori");
         var route = $(this).data("route");
         var token = $('meta[name="csrf-token"]').attr("content");
         $.ajax({
@@ -241,7 +242,7 @@ $(document).ready(function () {
                 _token: token,
             },
             success: function (response) {
-                window.location.href = "/shop";
+                window.location.href = `/shop/${kategori}`;
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -259,8 +260,8 @@ $(document).ready(function () {
             data: {
                 _token: token,
             },
-            success: function (response) {
-                location.reload();
+            success: function(response) {
+                window.location.href = '/shop';
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -282,8 +283,8 @@ $(document).ready(function () {
                 brand: brand,
                 _token: token,
             },
-            success: function (response) {
-                location.reload();
+            success: function(response) {
+                window.location.href =  `/shop/${brand}`;
             },
             error: function (xhr) {
                 console.log(xhr);

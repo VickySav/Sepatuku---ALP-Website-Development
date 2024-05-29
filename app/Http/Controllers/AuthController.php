@@ -11,6 +11,7 @@ class AuthController extends Controller
 {
     public function ShowLogin(Request $request)
     {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
         return view("login");
     }
     public function PostLogin(Request $request)

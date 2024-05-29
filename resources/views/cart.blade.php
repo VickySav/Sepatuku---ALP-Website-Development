@@ -54,7 +54,7 @@
                                     <div class="media">
                                         <div class="d-flex">
                                             <a href="{{ url("/product-details/{$cart->PRODUK_ID}-{$nameStrip}")}}">
-                                            <img src="{{ $cart->IMAGE }}" alt="" style="width: 100px; height:100px; object-fit:cover;">
+                                            <img src="/{{ $cart->IMAGE }}" alt="" style="width: 100px; height:100px; object-fit:cover;">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -91,11 +91,11 @@
 
                                 </td>
 
-          
+
                             </tr>
                             @endforeach
                              <!--================ Foreach dri Database =================-->
-                            
+
                             <tr class="out_button_area">
                                 <td>
 
@@ -127,7 +127,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document" id ="modalcenter">
               <div class="modal-content">
@@ -167,27 +167,34 @@
         $(document).ready(function() {
             // Disable the "Proceed to checkout" button by default
             $('.primary-btn').prop('disabled', true);
-        
+
             // Listen for changes on the checkboxes
             $('.cart-checkbox').change(function() {
                 // If at least one checkbox is selected
                 if ($('.cart-checkbox:checked').length > 0) {
                     // Enable the "Proceed to checkout" button
                     $('.primary-btn').prop('disabled', false);
-                    
+
                 } else {
                     // Otherwise, disable the "Proceed to checkout" button
                     $('.primary-btn').prop('disabled', true);
                 }
             });
             $('#checkout').click(function(){
-                var grandtotal = 0
+                var grandtotal = 0;
+                var index = 0;
                 $('.cart-checkbox:checked').each(function() {
                     var row = $(this).closest('tr');
                     var qty = parseInt(row.find('.cart-qty').val());
                     var price = row.find('.cart-trash').data('price');
                     grandtotal += (price *qty);
+                    index++;
                 });
+
+                if (index ===0)
+                {
+                    alert("Please select at least one product to checkout.");
+                }
                 $("#grandTotal").text("Grand Total : Rp  " + grandtotal.toLocaleString("id-ID"));
             });
     $(".btn.btn-primary").click(function() {
@@ -203,7 +210,7 @@
         price: row.find('.cart-trash').data('price')
       });
     });
-    
+
     if (selectedProducts.length === 0) {
       alert("Please select at least one product to checkout.");
       return false;  // Prevent form submission if no products selected
@@ -218,10 +225,12 @@
         products: selectedProducts
       },
       success: function(response) {
-        alert("Success:", response);
+        alert("Thank you for shopping at Sepatuku :D !");
         selectedProducts.forEach(element => {
             console.log(element);
         });
+
+        window.location.href = '/cart';
         // Handle successful order submission (e.g., redirect to order confirmation page)
       },
       error: function(xhr) {
@@ -237,7 +246,7 @@
 
         });
         </script>
-        
+
     <!--================End Cart Area =================-->
 </body>
 @endsection

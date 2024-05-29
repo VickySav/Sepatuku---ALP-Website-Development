@@ -8,6 +8,7 @@ class CartController extends Controller
 {
     public function ShowCart()
     {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
         $userID = HomeController::getUserID();
         $dataCart = $this->getCart($userID);
         $cartid = DB::table('CART')
@@ -40,7 +41,7 @@ class CartController extends Controller
         return response()->json(['success' => true]);
     }
 
-    
+
     public function deleteCart(Request $request)
     {
         $id = $request->input('id');

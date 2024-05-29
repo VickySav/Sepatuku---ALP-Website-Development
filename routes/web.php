@@ -26,6 +26,7 @@ Route::get('/product-details/{id}-{name}', [HomeController::class, 'ShowProductD
 Route::post('/product-details/addCart', [CartController::class, 'addCart'])->name('addCart');
 
 Route::get('/shop', [CategoryController::class,'ShowCategory']);
+Route::get('/shop/{kategori}', [CategoryController::class, 'ShowCategory']);
 Route::post('/shop/filter', [CategoryController::class, 'filterCategory'])->name('filterCategory');
 Route::post('/shop/clearFilter', [CategoryController::class, 'clearFilter'])->name('clearFilter');
 Route::post('/shop/brand', [CategoryController::class, 'filterBrand'])->name('filterBrand');
