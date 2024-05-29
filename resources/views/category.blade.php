@@ -26,7 +26,7 @@
                         <li class="main-nav-list clearKategori" data-route={{ route('clearFilter') }}><a data-toggle="collapse" aria-expanded="false"> All </a>
                         </li>
                         @foreach ($dataCategories as $kategori)
-                           <li class="main-nav-list kategoriShop" data-id={{ $kategori->KATEGORI_ID }} data-route={{ route('filterCategory') }}><a data-toggle="collapse" aria-expanded="false">{{ $kategori->NAMA_KATEGORI }}</a>
+                           <li class="main-nav-list kategoriShop" data-kategori={{ $kategori->NAMA_KATEGORI }} data-id={{ $kategori->KATEGORI_ID }} data-route={{ route('filterCategory') }}><a data-toggle="collapse" aria-expanded="false">{{ $kategori->NAMA_KATEGORI }}</a>
                             </li>
                         @endforeach
 					</ul>
@@ -35,7 +35,6 @@
 					<div class="top-filter-head">Product Filters</div>
 					<div class="common-filter">
 						<div class="head">Brands</div>
-						<form action="#">
 							<ul>
 								<li class="filter-list" data-route="{{ route('filterBrand')}}" data-brand="Adidas"><label for="asus">Adidas</label></li>
                                 <li class="filter-list" data-route="{{ route('filterBrand')}}" data-brand="Converse"><label for="micromax">Converse</label></li>
@@ -48,21 +47,20 @@
 								<li class="filter-list" data-route="{{ route('filterBrand')}}" data-brand="Vans"><label for="samsung">Vans</label></li>
 
 							</ul>
-						</form>
-					</div>
-					<div class="common-filter">
-						<div class="head">Price</div>
-						<div class="price-range-area">
-							<div id="price-range"></div>
-							<div class="value-wrapper d-flex">
-								<div class="price">Price:</div>
-								<span>$</span>
-								<div id="lower-value"></div>
-								<div class="to">to</div>
-								<span>$</span>
-								<div id="upper-value"></div>
-							</div>
-						</div>
+                            <div class="head">Price</div>
+                            <ul>
+                                <form class="form-inline">
+                                    <div class="form-group mr-2">
+                                        <label for="input1" class="sr-only">Input 1</label>
+                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input2" class="sr-only">Input 2</label>
+                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                    </div>
+                                </form>
+                            <ul>
+                           <br> <br> <br>
 					</div>
 				</div>
 			</div>
@@ -87,7 +85,7 @@
                         @if (Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="{{$produk->IMAGE}}" alt=""> </a>
+								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="/{{$produk->IMAGE}}" alt=""> </a>
 								<div class="product-details">
 									<h6 style="height: 57.56px">{{ $produk->NAMA_PRODUK }}</h6>
 									<div class="price">
@@ -108,7 +106,7 @@
                         @else
                         <div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="{{$produk->IMAGE}}" alt=""> </a>
+								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="/{{$produk->IMAGE}}" alt=""> </a>
 								<div class="product-details">
 									<h6>{{ $produk->NAMA_PRODUK }}</h6>
 									<div class="price">
@@ -149,133 +147,33 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="section-title">
-						<h1>Deals of the Week</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-							magna aliqua.</p>
+						<h1>You Might Also Like</h1>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r1.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r2.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r3.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r5.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r6.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r7.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r9.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r10.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r11.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="ctg-right">
-						<a href="#" target="_blank">
-							<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            {{-- RANDOM PRODUCTS --}}
+                            @foreach ($dataRandomProducts as $randomProduct)
+                            <div class="col-lg-4 col-md-4 col-sm-6 mb-20 d-flex justify-content-center">
+                                <div class="single-related-product d-flex">
+                                    <a href="#"><img src="/{{ $randomProduct->IMAGE }}" alt="" style="height: 80px"></a>
+                                    <div class="desc">
+                                        <a href="#" class="title">{{ $randomProduct->NAMA_PRODUK }}</a>
+                                        <div class="price">
+                                            <h6>{{ $randomProduct->HARGA }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            {{-- RANDOM PRODUCTS --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</section>
 	<!-- End related-product Area -->
@@ -347,5 +245,30 @@
 			</div>
 		</div>
 	</div>
+    <script>
+       var rupiah = document.getElementById('rupiah');
+		rupiah.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			rupiah.value = formatRupiah(this.value, 'Rp. ');
+		});
 
+		/* Fungsi formatRupiah */
+		function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
+    </script>
 @endsection

@@ -38,9 +38,11 @@ class CategoryController extends Controller
         }
 
         $categories = $this->getCategories();
+        $randomProducts = $this->getRandomProducts();
         return view("category", [
             "dataProducts" => $dataProducts,
-            "dataCategories" =>  $categories
+            "dataCategories" =>  $categories,
+            "dataRandomProducts" => $randomProducts
         ]);
     }
 
@@ -69,5 +71,10 @@ class CategoryController extends Controller
             session()->pull('BRAND');
         }
         $request->session()->put('BRAND', $brand);
+    }
+
+    public static function getRandomProducts(){
+        $products = collect(DB::select('select * from vRandomProducts'));
+        return $products;
     }
 }

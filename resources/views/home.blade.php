@@ -25,7 +25,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="img/banner/banner-img.png" alt="">
+									<img class="img-fluid" src="/img/banner/banner-img.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="assets/Air-Jordan-Sunset.webp" alt="">
+									<img class="img-fluid" src="/assets/Air-Jordan-Sunset.webp" alt="">
 								</div>
 							</div>
 						</div>
@@ -263,7 +263,7 @@
                     <div class="col-lg-3 col-md-6">
 						<div class="single-product">
 							<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}">
-                            <img class="img-fluid" src="{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
+                            <img class="img-fluid" src="/{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
                             </a>
                             <div class="product-details">
 								<h6>{{ $produk->NAMA_PRODUK }}</h6>
@@ -286,7 +286,7 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
 							<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}">
-                            <img class="img-fluid" src="{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
+                            <img class="img-fluid" src="/{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
                             </a>
                             <div class="product-details">
 								<h6>{{ $produk->NAMA_PRODUK }}</h6>
