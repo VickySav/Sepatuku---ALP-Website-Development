@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasswordResetToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPasswordMail;
 class AuthController extends Controller
 {
     public function ShowLogin(Request $request)
@@ -99,5 +103,53 @@ class AuthController extends Controller
     public function ShowForgotPass()
     {
         return view("forgot-password");
+    }
+    public function PostForgotPass(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        $DBuser = DB::table('Account')
+        ->where('email', '=', $request->email)
+        ->first();
+
+        $token = Str::random(60);
+
+        if($DBuser == null)
+        {
+            return redirect('/forgot-password')->with('error','Your email not found');
+        }
+        else{
+            PasswordResetToken::updateOrCreate(
+                ['email' => $request->email], // Search criteria
+                [
+                    'token' => $token,
+                    'created_at' => now(),
+                ] // Values to update or create
+            );
+            Mail::to($request->email)->send(new ResetPasswordMail($token));
+            return redirect('/login')->with('success','Please check your inbox email adrress for change your password');
+        }
+
+    }
+    public function ShowValidateForgotPass(){
+        return view('forgot-password-email');
+    }
+    public function ShowValidateForgotPassPost(Request $request){
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:50',
+            'password' => 'required|min:5',
+        ]);
+
+        $update = DB::table('ACCOUNT')
+            ->where('EMAIL', $validatedData['email'])
+            ->update([
+                'PASSWORD' => Hash::make($validatedData['password']),
+            ]);
+        if ($update) {
+            return redirect('/')->with('success', 'Password Change successful!');
+        } else {
+            return redirect('/')->with('error', 'Error occurred during changing password.');
+        }
     }
 }

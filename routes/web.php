@@ -10,14 +10,19 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactController;
 use App\Http\Middleware\ShouldAdminMiddleware;
-
+Route::view('/aw', 'mail-reset-password');
 
 Route::get("/login", [AuthController::class,"ShowLogin"]);
 Route::post("/login",[AuthController::class,"PostLogin"])->name("PostLogin");
 Route::get("/logout",[AuthController::class,"PostLogout"])->name("logout");
 Route::get("/registration", [AuthController::class,"ShowCreateAcc"]);
 Route::post("/registration",[AuthController::class,"PostRegister"])->name("PostRegister");
-Route::get("/forgot-passowrd", [AuthController::class,"ShowForgotPass"]);
+Route::get("/forgot-password", [AuthController::class,"ShowForgotPass"]);
+Route::post("/forgot-password-act",[AuthController::class,"PostForgotPass"])->name("forgotpasswordact");
+
+Route::get("/validasi-forgot-password/{token}", [AuthController::class,"ShowValidateForgotPass"])->name("ShowValidateForgotPass");
+Route::post("/validasi-forgot-password-post", [AuthController::class,"ShowValidateForgotPassPost"])->name("PostValidateForgotPass");
+
 Route::get('/',[HomeController::class,'ShowHome']);
 Route::post('/', [HomeController::class, 'addWishlist'])->name('addWishlist');
 
@@ -50,9 +55,12 @@ Route::get('/contact', [ContactController::class,'ShowContact']);
 Route::middleware([ShouldAdminMiddleware::class])->group(function() {
     Route::prefix('/admin')->group(function () {
         Route::get('/transaction', [AdminController::class,'ShowTransaction']);
-        Route::get('/manageproduct',  [AdminController::class,'ShowCatalog']);
+        Route::get('/manageproduct',  [AdminController::class,'ShowCatalog'])->name("manageproduct");
         Route::post('/manageproduct/add',  [AdminController::class,'AddNewProduct'])->name("AddNewProduct");
         Route::post('/manageproduct/edit',  [AdminController::class,'EditProduct'])->name("EditProduct");
+        Route::get("/edit-product/{id}", [AdminController::class,'ShowEditProduct'])->name("ShowEditProduct");
+        Route::get('/delete-product/{id}', [AdminController::class,'DeleteProduct'])->name("DeleteProduct");
+        Route::get('/detail-transaction/{id}', [AdminController::class,'ShowDetailTransaction'])->name("ShowDetailTransaction");
     });
 });
 // Route::view('/admin/manageproduct','admin-catalog');

@@ -1,4 +1,5 @@
 @section("title", "Admin - CRUD")
+@section("title", "Admin - Edit Product")
 @extends("template.admin-main")
 <style>
     .alert {
@@ -96,13 +97,17 @@
                             <td>{{$product->nama_produk}}</td>
                             <td><img class="img-fluid" src="/{{$product->image}}" alt="" width="200px"></td>
                             <td>{{$product->deskripsi}}</td>
-                            <td>Rp{{ number_format($product->harga, 0, ',', '.') }}</td>
+                            <td style="width:200px;">Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
 
                             <td>
-                                <form action="post">
-                                    <a href="#editProductModal" class="edit" data-id="{{$product->produk_id}}" id="edit_{{$product->produk_id}}" data-toggle="modal" onclick="sendIdToController({{$product->produk_id}})"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteProductModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </form>
+                                {{-- data-id="{{ $product->produk_id }}" id="edit_{{ $product->produk_id }}" data-toggle="modal" onclick="sendIdToController({{ $product->produk_id }})" --}}
+                                <a href="{{ route('ShowEditProduct', ['id' => $product->produk_id]) }}" class="edit" >
+                                    <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                </a>
+                                <a href="{{ route('DeleteProduct', ['id' => $product->produk_id]) }}" class="delete">
+                                    <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                </a>
+
                             </td>
                         </tr>
                         @endforeach
@@ -180,7 +185,7 @@
         <div id="editProductModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="{{route('EditProduct')}}" method="POST">
+                    <form action="#" method="POST">
                         @csrf
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Product</h4>
@@ -189,30 +194,34 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Product Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control productName">
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <input type="text" class="form-control">
+                                <input type="text mt-2" class="form-control description">
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" class="form-control price">
                             </div>
                             <!-- Row for Price and Size -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Price</label>
-                                        <input type="text" class="form-control">
+                                        <label>Size</label>
+                                        <input type="text" class="form-control size">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Size</label>
-                                        <input type="text" class="form-control">
+                                        <label>Amount</label>
+                                        <input type="text" class="form-control amount">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="file" class="form-control">
+                                <input type="file" class="form-control image">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -289,6 +298,13 @@
         div.style.opacity = "0";
         setTimeout(function(){ div.style.display = "none"; },1);
       }
+    }
+</script>
+<script>
+    function sendIdToController(productId) {
+        // Implement the function to handle the product ID
+        console.log("Product ID:", productId);
+        // You can use AJAX to send the ID to the controller if needed
     }
 </script>
 
