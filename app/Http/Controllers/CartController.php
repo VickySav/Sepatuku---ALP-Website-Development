@@ -8,10 +8,16 @@ class CartController extends Controller
 {
     public function ShowCart()
     {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
         $userID = HomeController::getUserID();
         $dataCart = $this->getCart($userID);
+        $cartid = DB::table('CART')
+                    ->select('CART_ID')
+                    ->where('ACCOUNT_ID', '=', $userID)
+                    ->value('CART_ID');
+                
         return view("Cart", [
-            "dataCart" => $dataCart
+            "dataCart" => $dataCart,
         ]);
     }
 
@@ -20,13 +26,11 @@ class CartController extends Controller
         $dataCart = collect(DB::select('CALL pGetCart(?)', [$id]));
         return $dataCart;
     }
-
     public function updateCart(Request $request)
     {
     $id = $request->input('id');
     $size = $request->input('size');
     $cartValue = $request->input('cart');
-
     // Update the Cart column in the database
 
         DB::table('DETAIL_CART')
@@ -37,7 +41,7 @@ class CartController extends Controller
         return response()->json(['success' => true]);
     }
 
-    
+
     public function deleteCart(Request $request)
     {
         $id = $request->input('id');
@@ -120,7 +124,6 @@ class CartController extends Controller
                     return response()->json(['success' => false, 'message' => 'Please choose the shoes size first']);
                 }
         }
-
         // if (blank($checkDuplicate))  {
         //     $insert =  DB::table('DETAIL_CART')
         //                 ->insert([
@@ -154,16 +157,87 @@ class CartController extends Controller
     }
 
     }
-    // public function deleteCart($produkID,$size)
+    // public function addOrder() 
     // {
-    //     dd ($produkID);
-    //     DB::table('DETAIL_CART')
-    //     ->where('PRODUK_ID', $produkID)
-    //     ->where('UKURAN', $size)
-    //     ->update(['JUMLAH' => 0]);
+        
+    //     $products = $_POST['products'];
+    //     $userID = HomeController::getUserID();
+    //     $cartid = DB::table('CART')
+    //     ->select('CART_ID')
+    //     ->where('ACCOUNT_ID', '=', $userID)
+    //     ->value('CART_ID');
+    //     $subtotal = DB::table('DETAIL_CART')
+    //     ->join('PRODUK', 'DETAIL_CART.PRODUK_ID', '=', 'PRODUK.PRODUK_ID')
+    //     ->select(DB::raw('SUM(DETAIL_CART.JUMLAH * PRODUK.HARGA) AS Subtotal'))
+    //     ->where('DETAIL_CART.CART_ID', '=', $cartid)
+    //     ->first();
+    //     $orderid = DB::table('ORDER_TABLE')
+    //     ->INSERT([
+    //         'ACCOUNT_ID' => $userID,
+    //         'TOTAL_HARGA' => $subtotal
 
-    //     session()->flash('success','Item has been removed');
-
+    //     ]);
+    //     foreach ($products as $product) 
+    //     {
+    //         $id = $product['id'];
+    //         $size = $product['size'];
+    //         $qty = $product['qty'];
+    //         $price = $product['price'];
+            
+    //         $addorder = DB::table('DETAIL_ORDER')
+    //         ->INSERT([
+    //             'ORDER_ID' => $orderid,
+    //             'PRODUK_ID' => $id,
+    //             'SIZE' => $size,
+    //             'JUMLAH' => $qty,
+    //         ]);
+    //     }
     // }
+    public function addOrder(Request $request)
+{
+    $products = $request->input('products');
+    $userID = HomeController::getUserID();
+    $cartid = DB::table('CART')
+        ->select('CART_ID')
+        ->where('ACCOUNT_ID', '=', $userID)
+        ->value('CART_ID');
+    $amount = 0;
+    foreach ($products as $product){
+        $amount += ($product['price'] * $product['qty']);
+    };
+    DB::table('ORDER_TABLE')->INSERT([
+    'ACCOUNT_ID' => $userID,
+    'TOTAL_HARGA' => $amount,
+    ]);
+    $latestOrderID = DB::table('ORDER_TABLE')
+    ->select(DB::raw('MAX(ORDER_ID) AS latest_order_id'))
+    ->orderBy('ORDER_TIME', 'DESC')
+    ->first();
+    foreach ($products as $product) {
+    DB::table('DETAIL_ORDER')->insert([
+    'ORDER_ID' => $latestOrderID->latest_order_id,
+    'PRODUK_ID' => str($product['id']),
+    'UKURAN' => $product['size'],
+    'JUMLAH' => $product['qty'],
+    ]);
+    DB::table('DETAIL_CART')
+    ->where('PRODUK_ID', '=',$product['id'] )
+    ->where('UKURAN', '=', $product['size'])
+    ->where('CART_ID', '=', $cartid)
+    ->delete();
+    }   
 
-    }
+
+}
+// public function deleteCart($produkID,$size)
+// {
+// dd ($produkID);
+// DB::table('DETAIL_CART')
+// ->where('PRODUK_ID', $produkID)
+// ->where('UKURAN', $size)
+// ->update(['JUMLAH' => 0]);
+
+// session()->flash('success','Item has been removed');
+
+// }
+}

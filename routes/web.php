@@ -10,7 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactController;
 use App\Http\Middleware\ShouldAdminMiddleware;
-Route::view('/aw', 'mail-reset-password');
+use App\Http\Controllers\HistoryController;
 
 Route::get("/login", [AuthController::class,"ShowLogin"]);
 Route::post("/login",[AuthController::class,"PostLogin"])->name("PostLogin");
@@ -31,6 +31,7 @@ Route::get('/product-details/{id}-{name}', [HomeController::class, 'ShowProductD
 Route::post('/product-details/addCart', [CartController::class, 'addCart'])->name('addCart');
 
 Route::get('/shop', [CategoryController::class,'ShowCategory']);
+Route::get('/shop/{kategori}', [CategoryController::class, 'ShowCategory']);
 Route::post('/shop/filter', [CategoryController::class, 'filterCategory'])->name('filterCategory');
 Route::post('/shop/clearFilter', [CategoryController::class, 'clearFilter'])->name('clearFilter');
 Route::post('/shop/brand', [CategoryController::class, 'filterBrand'])->name('filterBrand');
@@ -41,7 +42,7 @@ Route::get('/checkout', [CheckoutController::class,'ShowCheckout']);
 Route::get('/cart', [CartController::class,'ShowCart']);
 Route::post('/cart/update', [CartController::class,'updateCart'])->name('updateCart');
 Route::post('/cart/delete', [CartController::class,'deleteCart'])->name('deleteCart');
-
+Route::post('/cart', [CartController::class,'addOrder'])->name('addOrder');
 // Route::post('/cart', [CartController::class,'deleteCart'])->name('deleteCart');
 
 
@@ -66,5 +67,4 @@ Route::middleware([ShouldAdminMiddleware::class])->group(function() {
 // Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');
 //Route::view('/tracking', 'tracking');
-
-
+Route::get('/history', [HistoryController::class, 'showHistory']);
