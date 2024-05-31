@@ -198,7 +198,7 @@
 							<img class="img-fluid" src="{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
                             </a>
                             <div class="product-details">
-								<h6>{{ $produk->NAMA_PRODUK}}</h6>
+								<h6 style="height: 57.56px;">{{ $produk->NAMA_PRODUK}}</h6>
 								<div class="price">
 									<p style="font-weight: 100;"> Rp {{ number_format($produk->HARGA, 0, ',', '.') }} </p>
 								</div>
@@ -223,7 +223,7 @@
                                 <img class="img-fluid" src="{{$produk->IMAGE}}" alt="" style="width: 200px; height:150px; object-fit:cover;">
                                 </a>
                                 <div class="product-details">
-                                    <h6>{{ $produk->NAMA_PRODUK}}</h6>
+                                    <h6 style="height: 57.56px;">{{ $produk->NAMA_PRODUK}}</h6>
                                     <div class="price">
                                         <p style="font-weight: 100;"> Rp {{ number_format($produk->HARGA, 0, ',', '.') }} </p>
                                     </div>
