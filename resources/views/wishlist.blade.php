@@ -15,7 +15,7 @@
         </div>
     </div>
 </section>
-@if(isset($dataCart) && count($dataCart) > 0)
+@if(isset($dataWishlist) && count($dataWishlist) > 0)
 <!-- End Banner Area -->
 <section class="cart_area">
     <div class="container">

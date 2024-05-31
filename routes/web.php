@@ -28,9 +28,9 @@ Route::post('/product-details/addCart', [CartController::class, 'addCart'])->nam
 Route::get('/shop', [CategoryController::class,'ShowCategory']);
 Route::get('/shop/{kategori}', [CategoryController::class, 'ShowCategory']);
 Route::post('/shop/filter', [CategoryController::class, 'filterCategory'])->name('filterCategory');
-Route::post('/shop/clearFilter', [CategoryController::class, 'clearFilter'])->name('clearFilter');
+Route::post('/shop/clearFilter', [HomeController::class, 'clearFilterSession'])->name('clearFilter');
 Route::post('/shop/brand', [CategoryController::class, 'filterBrand'])->name('filterBrand');
-
+Route::post('/shop/{minPrice}-{maxPrice}', [CategoryController::class, 'filterPrice'])->name('filterPrice');
 
 Route::get('/checkout', [CheckoutController::class,'ShowCheckout']);
 
@@ -38,8 +38,6 @@ Route::get('/cart', [CartController::class,'ShowCart']);
 Route::post('/cart/update', [CartController::class,'updateCart'])->name('updateCart');
 Route::post('/cart/delete', [CartController::class,'deleteCart'])->name('deleteCart');
 Route::post('/cart', [CartController::class,'addOrder'])->name('addOrder');
-// Route::post('/cart', [CartController::class,'deleteCart'])->name('deleteCart');
-
 
 Route::get('/wishlist', [WishlistController::class,'ShowWishlist']);
 Route::post('/wishlist/delete', [WishlistController::class,'deleteWishlist'])->name('deleteWishlist');

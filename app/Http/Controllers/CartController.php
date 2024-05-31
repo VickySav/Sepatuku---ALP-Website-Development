@@ -8,14 +8,15 @@ class CartController extends Controller
 {
     public function ShowCart()
     {
-        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        HomeController::clearFilterSession();
+
         $userID = HomeController::getUserID();
         $dataCart = $this->getCart($userID);
         $cartid = DB::table('CART')
                     ->select('CART_ID')
                     ->where('ACCOUNT_ID', '=', $userID)
                     ->value('CART_ID');
-                
+
         return view("Cart", [
             "dataCart" => $dataCart,
         ]);
@@ -124,77 +125,11 @@ class CartController extends Controller
                     return response()->json(['success' => false, 'message' => 'Please choose the shoes size first']);
                 }
         }
-        // if (blank($checkDuplicate))  {
-        //     $insert =  DB::table('DETAIL_CART')
-        //                 ->insert([
-        //                     'CART_ID' => $ID,
-        //                     'PRODUK_ID' => $productID,
-        //                     'UKURAN' => $ukuran,
-        //                     'JUMLAH'=> $jumlah
-        //                 ]);
-        //         if ($insert) {
-        //             return response()->json(['success' => true, 'message' => 'Item added to cart successfully']);
-        //         } else {
-        //             return response()->json(['success' => false, 'message' => 'Insert failed']);
-        //         }
-        // }
-        // else if($jumlah>$stockValidate) {
-        //     return response()->json(['success' => true, 'message' => 'You have reached the maximum']);
-        // } else {
-        //     $totalCart =  $checkDuplicate->JUMLAH + $jumlah;
-        //     $update =  DB::table('DETAIL_CART')
-        //                 ->where('PRODUK_ID', $productID)
-        //                 ->where('UKURAN', $ukuran)
-        //                 ->update(['JUMLAH' =>  $totalCart]);
-        //     if ($update) {
-        //         return response()->json(['success' => true, 'message' => 'Updated from cart']);
-        //     } else {
-        //         return response()->json(['success' => false, 'message' => 'Delete failed']);
-        //     }
-        // }
+        }
 
-
-    }
-
-    }
-    // public function addOrder() 
-    // {
-        
-    //     $products = $_POST['products'];
-    //     $userID = HomeController::getUserID();
-    //     $cartid = DB::table('CART')
-    //     ->select('CART_ID')
-    //     ->where('ACCOUNT_ID', '=', $userID)
-    //     ->value('CART_ID');
-    //     $subtotal = DB::table('DETAIL_CART')
-    //     ->join('PRODUK', 'DETAIL_CART.PRODUK_ID', '=', 'PRODUK.PRODUK_ID')
-    //     ->select(DB::raw('SUM(DETAIL_CART.JUMLAH * PRODUK.HARGA) AS Subtotal'))
-    //     ->where('DETAIL_CART.CART_ID', '=', $cartid)
-    //     ->first();
-    //     $orderid = DB::table('ORDER_TABLE')
-    //     ->INSERT([
-    //         'ACCOUNT_ID' => $userID,
-    //         'TOTAL_HARGA' => $subtotal
-
-    //     ]);
-    //     foreach ($products as $product) 
-    //     {
-    //         $id = $product['id'];
-    //         $size = $product['size'];
-    //         $qty = $product['qty'];
-    //         $price = $product['price'];
-            
-    //         $addorder = DB::table('DETAIL_ORDER')
-    //         ->INSERT([
-    //             'ORDER_ID' => $orderid,
-    //             'PRODUK_ID' => $id,
-    //             'SIZE' => $size,
-    //             'JUMLAH' => $qty,
-    //         ]);
-    //     }
-    // }
+        }
     public function addOrder(Request $request)
-{
+    {
     $products = $request->input('products');
     $userID = HomeController::getUserID();
     $cartid = DB::table('CART')
@@ -225,19 +160,8 @@ class CartController extends Controller
     ->where('UKURAN', '=', $product['size'])
     ->where('CART_ID', '=', $cartid)
     ->delete();
-    }   
+    }
 
 
 }
-// public function deleteCart($produkID,$size)
-// {
-// dd ($produkID);
-// DB::table('DETAIL_CART')
-// ->where('PRODUK_ID', $produkID)
-// ->where('UKURAN', $size)
-// ->update(['JUMLAH' => 0]);
-
-// session()->flash('success','Item has been removed');
-
-// }
 }

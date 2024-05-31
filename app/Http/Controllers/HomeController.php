@@ -11,7 +11,8 @@ class HomeController extends Controller
 
     public function ShowHome()
     {
-        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        HomeController::clearFilterSession();
+
         $newestProducts = $this->newestProducts();
         $bestSellling = $this->bestSellingProducts();
         return view("home",[
@@ -21,7 +22,8 @@ class HomeController extends Controller
     }
     public function ShowProductDetails(string $id)
     {
-        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        HomeController::clearFilterSession();
+
         $randomProducts = CategoryController::getRandomProducts();
         $dataProduct = $this->getProduct($id);
         $product = $dataProduct->first();
@@ -118,15 +120,19 @@ class HomeController extends Controller
 
         return $wishlistID;
     }
-    // private function Search(string $search = null)
-    // {
-    //     $query = DB::table("product");
+    public static function search(Request $request)
+    {
+        HomeController::clearFilterSession();
 
-    //     if ($search != null)
-    //     {
-    //         $query = $query->where('name', 'like', "%{$search}%");
-    //     }
+        $search = $request->input('search_input');
+    }
 
-    //     return $query->get();
-    // }
+    public static function clearFilterSession() // UNTUK HAPUS SESSION FILTER SHOP
+    {
+        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        session()->pull('BRAND');// PENTING !! BUAT HAPUS BRAND SUPAYA G NGEBUG
+        session()->pull('MINPRICE');
+        session()->pull('MAXPRICE');
+        session()->pull('SEARCH');
+    }
 }
