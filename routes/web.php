@@ -10,7 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactController;
 use App\Http\Middleware\ShouldAdminMiddleware;
-
+use App\Http\Controllers\HistoryController;
 
 Route::get("/login", [AuthController::class,"ShowLogin"]);
 Route::post("/login",[AuthController::class,"PostLogin"])->name("PostLogin");
@@ -59,3 +59,4 @@ Route::middleware([ShouldAdminMiddleware::class])->group(function() {
 // Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');
 //Route::view('/tracking', 'tracking');
+Route::get('/history', [HistoryController::class, 'showHistory']);
