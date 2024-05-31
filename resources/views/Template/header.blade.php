@@ -99,9 +99,9 @@
                                 <li class="nav-item"><input type="hidden"></li>
                                 <li class="nav-item" id="cart"><a href="/cart" class="cart"><span class="ti-bag"></span></a></li>
                                 <li class="nav-item" id="wishlist"><a href="/wishlist" class="wishlist"><span class="ti-heart"></span></a></li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     @else
@@ -131,7 +131,7 @@
 		<div class="search_input" id="search_input_box">
 			<div class="container">
 				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<input type="search" class="form-control search" name="search_input" id="search_input" placeholder="Search Here">
 					<button type="submit" class="btn"></button>
 					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
 				</form>

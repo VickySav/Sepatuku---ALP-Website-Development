@@ -165,6 +165,7 @@ $(document).ready(function () {
             },
         });
     });
+    
     $(document).ready(function () {
         $(".cart-qty").on("change", function () {
             var harga = $(this).data("harga");

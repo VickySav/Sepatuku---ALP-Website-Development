@@ -8,7 +8,8 @@ class WishlistController extends Controller
 {
     public function ShowWishlist()
     {
-        session()->pull('KATEGORI_ID'); // PENTING !! BUAT HAPUS KATEGORI SUPAYA G NGEBUG
+        HomeController::clearFilterSession();
+
         $userID = HomeController::getUserID();
         $dataWishlist = $this->getWishlist($userID);
         return view("Wishlist", [

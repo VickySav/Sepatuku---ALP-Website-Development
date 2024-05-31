@@ -1,7 +1,144 @@
-@section("title", "JUDUL")
-@extends("template.main")
-@section("body")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="/img/sepatuku.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<!-- Site Title -->
+	<title>Sepatuku</title>
+	<!--
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="{{ asset('css/linearicons.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/ion.rangeSlider.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/ion.rangeSlider.skinFlat.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    {{--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        var $li = $('.nav navbar-nav menu_nav ml-auto li').click(function() {
+    $li.removeClass('selected');
+    $(this).addClass('selected');
+    });
+    </script>
+    --}}
+    <script src="{{ asset('js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+    <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('js/countdown.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <script src="{{ asset('js/gmaps.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="/"><img src="/img/sepatuku.png" alt="" style="width: 180px;"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+                    @if (Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                {{-- <li class="nav-item"><a class="nav-link" href="/login">Login</a></li> --}}
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                    aria-expanded="false">{{ Session::get('USERNAME') ?? Cookie::get('USERNAME')}}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="{{route('logout')}}">logout</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#">history</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>
+                                <li class="nav-item" id="shop"><a class="nav-link" href="/shop">Shop</a></li>                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-item"><input type="hidden"></li>
+                                <li class="nav-item" id="cart"><a href="/cart" class="cart"><span class="ti-bag"></span></a></li>
+                                <li class="nav-item" id="wishlist"><a href="/wishlist" class="wishlist"><span class="ti-heart"></span></a></li>
+                                <li class="nav-item">
+                                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                {{-- <li class="nav-item"><a class="nav-link" href="/login">Login</a></li> --}}
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                    aria-expanded="false">Account</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="/login">login</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-item">
+                                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="search" class="form-control search" name="search_input" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
+    </html>
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -48,23 +185,24 @@
 
 							</ul>
                             <div class="head">Price</div>
-                            <ul>
-                                <form class="form-inline">
+                            <div class="head">
+
                                     <div class="form-group mr-2">
-                                        <label for="input1" class="sr-only">Input 1</label>
-                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                        <input type="text" class="form-control form-control-sm small-input minPrice" id="rupiah1" placeholder="MIN" style="width: 150px;">
                                     </div>
                                     <div class="form-group">
-                                        <label for="input2" class="sr-only">Input 2</label>
-                                        <input type="text" class="form-control form-control-sm small-input" id="rupiah" placeholder="Input 1" style="width: 90px;" oninput="formatNumber(this)">
+                                        <input type="text" class="form-control form-control-sm small-input maxPrice" id="rupiah2" placeholder="MAX" style="width: 150px;">
                                     </div>
-                                </form>
-                            <ul>
-                           <br> <br> <br>
-					</div>
+
+                            </ul>
+                                <button type="button" class="btn btn-secondary btn-apply" data-route="{{ route('filterPrice', ['minPrice' => 0, 'maxPrice' => 0]) }}" style="padding: 5px 10px; font-size: 12px; margin: 5px;"> Apply </button> </div>
+
+                            <br>
+                        </div>
 				</div>
 			</div>
 			<div class="col-xl-9 col-lg-8 col-md-7">
+                @if(isset($dataProducts) && count($dataProducts) > 0)
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
                     <div class="sorting mr-auto">
@@ -137,6 +275,13 @@
 					</div>
 				</div>
 				<!-- End Filter Bar -->
+                @else
+                <div class="container">
+                    <div class="text-center"> <!-- Add text-center class to center align the content -->
+                        <h1 style="margin:50px;">No Product Found</h1>
+                    </div>
+                </div>
+                @endif
 			</div>
 		</div>
 	</div>
@@ -178,79 +323,21 @@
 	</section>
 	<!-- End related-product Area -->
 
-
-	<!-- Modal Quick Product View -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="container relative">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<div class="product-quick-view">
-					<div class="row align-items-center">
-						<div class="col-lg-6">
-							<div class="quick-view-carousel">
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-								<div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="quick-view-content">
-								<div class="top">
-									<h3 class="head">Mill Oil 1000W Heater, White</h3>
-									<div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
-									<div class="category">Category: <span>Household</span></div>
-									<div class="available">Availibility: <span>In Stock</span></div>
-								</div>
-								<div class="middle">
-									<p class="content">Mill Oil is an innovative oil filled radiator with the most modern technology. If you are
-										looking for something that can make your interior look awesome, and at the same time give you the pleasant
-										warm feeling during the winter.</p>
-									<a href="#" class="view-full">View full Details <span class="lnr lnr-arrow-right"></span></a>
-								</div>
-								<div class="bottom">
-									<div class="color-picker d-flex align-items-center">Color:
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-										<span class="single-pick"></span>
-									</div>
-									<div class="quantity-container d-flex align-items-center mt-15">
-										Quantity:
-										<input type="text" class="quantity-amount ml-15" value="1" />
-										<div class="arrow-btn d-inline-flex flex-column">
-											<button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
-											<button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
-										</div>
-
-									</div>
-									<div class="d-flex mt-20">
-										<a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
-										<a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
-										<a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
     <script>
-       var rupiah = document.getElementById('rupiah');
-		rupiah.addEventListener('keyup', function(e){
-			// tambahkan 'Rp.' pada saat form di ketik
-			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-			rupiah.value = formatRupiah(this.value, 'Rp. ');
+       var rupiah1 = document.getElementById('rupiah1');
+       var rupiah2 = document.getElementById('rupiah2');
+
+       let minPrice=0;
+       let maxPrice=0;
+
+		rupiah1.addEventListener('keyup', function(e){
+            minPrice = this.value.replace(/\D/g, '');
+			rupiah1.value = formatRupiah(this.value, 'Rp. ');
+		});
+
+        rupiah2.addEventListener('keyup', function(e){
+            maxPrice = this.value.replace(/\D/g, '');
+			rupiah2.value = formatRupiah(this.value, 'Rp. ');
 		});
 
 		/* Fungsi formatRupiah */
@@ -270,5 +357,39 @@
 			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
 			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 		}
+
+
+    $(document).ready(function () {
+        $(".btn-apply").click(function () {
+            if (maxPrice === 0 || minPrice === 0)
+            {
+                alert('Please fill the minimum/maximum price first');
+            } else
+            {
+                var route = $(this).data("route");
+                var token = $('meta[name="csrf-token"]').attr("content");
+                $.ajax({
+                    url: route,
+                    type: "POST",
+                    data: {
+                        minPrice: minPrice,
+                        maxPrice: maxPrice,
+                        _token: token,
+                    },
+                    success: function (response) {
+                        alert('SUKSES');
+                        window.location.href = `/shop/${minPrice}-${maxPrice}`;
+
+                        // Handle success, e.g., display a success message
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        // Handle errors
+                    },
+                });
+            }
+
+        });
+    });
     </script>
-@endsection
+
