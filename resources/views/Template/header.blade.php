@@ -119,9 +119,9 @@
                                 <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     @endif

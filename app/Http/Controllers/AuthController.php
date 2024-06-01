@@ -96,7 +96,22 @@ class AuthController extends Controller
             'PHONE_NUMBER' => $validatedData['phone'],
             'ADDRESS' => $validatedData['address'],
         ]);
-        if ($insert) {
+        $accountId = DB::table('account')
+                ->select('account_id')
+                ->where('username', '=', $validatedData['username'])
+                ->value('account_id');
+
+        $insertCart = DB::table('cart')->insert([
+            'ACCOUNT_ID'=> $accountId,
+            'NAMA_CART'=> DB::raw('fGenCart("' . $validatedData['username'] . '")'),
+        ]);
+
+        $insertCart = DB::table('wishlist')->insert([
+            'ACCOUNT_ID'=> $accountId,
+            'NAMA_WISHLIST'=> DB::raw('fGenWishList("' . $validatedData['username'] . '")'),
+        ]);
+
+        if ($insert && $insertCart && $insertCart) {
             return redirect('/login')->with('success', 'Registration successful!');
         } else {
             return redirect('/registration')->with('error', 'Error occurred during registration.');
