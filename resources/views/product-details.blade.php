@@ -73,7 +73,7 @@
 
 
 	<!-- Start related-product Area -->
-	<section class="related-product-area section_gap">
+<section class="related-product-area section_gap">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
@@ -88,13 +88,16 @@
                         <div class="row">
                             {{-- RANDOM PRODUCTS --}}
                             @foreach ($dataRandomProducts as $randomProduct)
+                            @php
+                            $nameStrip = str($randomProduct->NAMA_PRODUK)->replace(' ', '-');
+                            @endphp
                             <div class="col-lg-4 col-md-4 col-sm-6 mb-20 d-flex justify-content-center">
                                 <div class="single-related-product d-flex">
-                                    <a href="#"><img src="/{{ $randomProduct->IMAGE }}" alt="" style="height: 80px"></a>
+                                    <a href="{{ url("/product-details/{$randomProduct->PRODUK_ID}-{$nameStrip}")}}"><img src="/{{ $randomProduct->IMAGE }}" alt="" style="height: 80px"></a>
                                     <div class="desc">
-                                        <a href="#" class="title">{{ $randomProduct->NAMA_PRODUK }}</a>
+                                        <a href="{{ url("/product-details/{$randomProduct->PRODUK_ID}-{$nameStrip}")}}" class="title">{{ $randomProduct->NAMA_PRODUK }}</a>
                                         <div class="price">
-                                            <h6>{{ $randomProduct->HARGA }}</h6>
+                                            <h6>Rp {{ number_format($randomProduct->HARGA, 0, ',', '.') }}</h6>
                                         </div>
                                     </div>
                                 </div>

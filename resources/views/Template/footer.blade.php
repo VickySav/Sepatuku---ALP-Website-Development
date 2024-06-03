@@ -16,8 +16,7 @@
                         <div class="single-footer-widget">
                             <h6>About Us</h6>
                             <p class="text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-                                magna aliqua.
+                                Since 2024, we've been dedicated to selling trendy shoes that combine high quality with the best prices. Our mission is to provide our customers with stylish, comfortable footwear that doesn't break the bank. At our store, you'll find the latest designs from top brands, ensuring you always step out in style.
                             <p>
                         </div>
                     </div>

@@ -61,7 +61,8 @@ class HomeController extends Controller
     {
         $dataProduct =  DB::table('PRODUK')->select('PRODUK.PRODUK_ID', 'PRODUK.NAMA_PRODUK','PRODUK.HARGA', 'PRODUK.IMAGE', 'PRODUK.DESKRIPSI', 'DETAIL_PRODUK.UKURAN', 'DETAIL_PRODUK.JUMLAH')
                                             ->join('DETAIL_PRODUK','PRODUK.PRODUK_ID','=','DETAIL_PRODUK.PRODUK_ID')
-                                            ->where('PRODUK.PRODUK_ID', '=', $id);
+                                            ->where('PRODUK.PRODUK_ID', '=', $id)
+                                            ->orderBy('DETAIL_PRODUK.UKURAN');
         return $dataProduct->get();
     }
 
