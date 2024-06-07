@@ -10,6 +10,7 @@
                         <p>Change your password and remember it!</p>
 						<form class="row login_form" action="{{route('PostValidateForgotPass')}}" method="post" id="contactForm">
                             @csrf
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <div class="col-md-12 form-group">
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
 							</div>
