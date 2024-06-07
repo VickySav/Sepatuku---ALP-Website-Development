@@ -37,6 +37,9 @@ class CategoryController extends Controller
             ->where('HARGA', '>=', $MINPRICE)
             ->where('HARGA', '<=', $MAXPRICE)
             ->paginate(9);
+            if ($dataProducts->isEmpty()) {
+                session()->forget(['MINPRICE', 'MAXPRICE']);
+            }
         } else{
             $dataProducts = DB::table('produk')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')

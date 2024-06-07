@@ -367,10 +367,14 @@
             if (maxPrice === 0 || minPrice === 0)
             {
                 alert('Please fill the minimum/maximum price first');
-            } else if(minPrice>maxPrice)
-            {
-                alert('Minimum price should be lower than maximum price');
-            } else
+            }
+            // } else if(minPrice>maxPrice)
+            // {
+            //     console.log('minPrice:', minPrice, typeof minPrice);
+            //     console.log('maxPrice:', maxPrice, typeof maxPrice);
+            //     alert('Minimum price should be lower than maximum price');
+            // }
+            else
             {
                 var route = $(this).data("route");
                 var token = $('meta[name="csrf-token"]').attr("content");
@@ -384,7 +388,6 @@
                     },
                     success: function (response) {
                         window.location.href = `/shop/${minPrice}-${maxPrice}`;
-
                         // Handle success, e.g., display a success message
                     },
                     error: function (xhr) {

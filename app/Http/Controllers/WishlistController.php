@@ -32,7 +32,7 @@ class WishlistController extends Controller
             ->delete();
 
         if ($delete) {
-            return response()->json(['success' => true, 'message' => 'Successfully updated.']);
+            return response()->json(['success' => true, 'message' => 'Successfully deleted.']);
         } else {
             return response()->json(['success' => false, 'message' => 'Update failed']);
         }
