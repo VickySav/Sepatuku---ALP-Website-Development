@@ -87,17 +87,53 @@ class AuthController extends Controller
             'phone' => 'required|min:8|max:15',
             'address' => 'required|max:100',
         ]);
-        $insert = DB::table('ACCOUNT')->insert([
-            'USERNAME' => $validatedData['username'],
-            'PASSWORD' => Hash::make($validatedData['password']),
-            'EMAIL' => $validatedData['email'],
-            'PHONE_NUMBER' => $validatedData['phone'],
-            'ADDRESS' => $validatedData['address'],
-        ]);
-        if ($insert) {
-            return redirect('/login')->with('success', 'Registration successful!');
-        } else {
-            return redirect('/registration')->with('error', 'Error occurred during registration.');
+        $checkUsername = DB::table('ACCOUNT')->where('username', '=', $validatedData['username'])->first();
+        $checkEmail = DB::table('ACCOUNT')->where('email', '=', $validatedData['email'])->first();
+
+        if($checkUsername == null && $checkEmail == null){
+            $insert = DB::table('ACCOUNT')->insert([
+                'USERNAME' => $validatedData['username'],
+                'PASSWORD' => Hash::make($validatedData['password']),
+                'EMAIL' => $validatedData['email'],
+                'PHONE_NUMBER' => $validatedData['phone'],
+                'ADDRESS' => $validatedData['address'],
+            ]);
+            $accountId = DB::table('account')
+                    ->select('account_id')
+                    ->where('username', '=', $validatedData['username'])
+                    ->value('account_id');
+
+            $insertCart = DB::table('cart')->insert([
+                'ACCOUNT_ID'=> $accountId,
+                'NAMA_CART'=> DB::raw('fGenCart("' . $validatedData['username'] . '")'),
+            ]);
+
+            $insertCart = DB::table('wishlist')->insert([
+                'ACCOUNT_ID'=> $accountId,
+                'NAMA_WISHLIST'=> DB::raw('fGenWishList("' . $validatedData['username'] . '")'),
+            ]);
+
+            if ($insert && $insertCart && $insertCart) {
+                return redirect('/login')->with('success', 'Registration successful!');
+            } else {
+                return redirect('/registration')->with('error', 'Error occurred during registration.');
+            }
+        }
+        else
+        {
+            if($checkEmail !=null && $checkUsername != null)
+            {
+                return redirect('/registration')->with('error', 'Username and Email already exist please change');
+            }
+            else if($checkEmail !=null)
+            {
+                return redirect('/registration')->with('error', 'Email already exist please change');
+            }
+            else
+            {
+                return redirect('/registration')->with('error', 'Username already exist please change');
+            }
+
         }
     }
     public function ShowForgotPass()
@@ -132,24 +168,45 @@ class AuthController extends Controller
         }
 
     }
-    public function ShowValidateForgotPass(){
-        return view('forgot-password-email');
+    public function ShowValidateForgotPass($token ){
+        $DBuser = DB::table('password_reset_tokens')
+        ->where('token', '=', $token)
+        ->first();
+
+        if($DBuser != null)
+            return view('forgot-password-email',compact('token'));
+        else
+        return redirect('/')->with('error','You don`t have access for that!');
     }
     public function ShowValidateForgotPassPost(Request $request){
         $validatedData = $request->validate([
             'email' => 'required|email|max:50',
             'password' => 'required|min:5',
+            'token' => 'required|string',
         ]);
+        $token = $validatedData['token'];
 
-        $update = DB::table('ACCOUNT')
+        $DBuser = DB::table('password_reset_tokens')
+        ->where('token', 'LIKE', $token)
+        ->value('email');
+
+        if ($DBuser === $validatedData ['email']) {
+            $update = DB::table('ACCOUNT')
             ->where('EMAIL', $validatedData['email'])
             ->update([
                 'PASSWORD' => Hash::make($validatedData['password']),
             ]);
-        if ($update) {
-            return redirect('/')->with('success', 'Password Change successful!');
-        } else {
-            return redirect('/')->with('error', 'Error occurred during changing password.');
+            DB::table('password_reset_tokens')
+            ->where('token', '=', $token)
+            ->delete();
+            if ($update) {
+                return redirect('/')->with('success', 'Password Change successful!');
+            } else {
+                return redirect('/')->with('error', 'Error occurred during changing password.');
+            }
+        }
+        else{
+            return redirect("/validasi-forgot-password/{$token}")->with('error', 'Enter your own email');
         }
     }
 }

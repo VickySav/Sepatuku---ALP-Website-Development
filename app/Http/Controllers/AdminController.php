@@ -217,7 +217,7 @@ class AdminController extends Controller
     }
     public function ShowEditProduct($id)
     {
-        $product = DB::table('produk')
+        $produk = DB::table('produk')
             ->select('produk_id','nama_produk', 'deskripsi', 'harga','image','kategori_id')
             ->where('produk_id', $id)
             ->first();
@@ -229,7 +229,11 @@ class AdminController extends Controller
                 ->get();
 
 
-        return view("admin-editproduct",compact('product', 'dproduct'));
+        $query= DB::table('produk')
+        ->select('produk_id', 'nama_produk', 'image', 'deskripsi', 'harga');
+
+        $products = $query->paginate(5);
+        return view("admin-editproduct",compact('produk', 'dproduct','products'));
     }
 
     public function DeleteProduct($id)
