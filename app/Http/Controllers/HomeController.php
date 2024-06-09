@@ -79,13 +79,13 @@ class HomeController extends Controller
             $wishlistID = $wishlist->WISHLIST_ID; // Access the wishlist ID property
             $id = $request->input('id');
 
-            $checkDuplicate = DB::table('detail_wishlist')
+            $checkDuplicate = DB::table('DETAIL_WISHLIST')
                             ->select('WISHLIST_ID')
                             ->where('WISHLIST_ID', '=', $wishlistID)
                             ->where('PRODUK_ID', '=', $id)
                             ->count();
             if ($checkDuplicate == 0) {
-                $insert = DB::table('detail_wishlist')
+                $insert = DB::table('DETAIL_WISHLIST')
                     ->insert([
                         'WISHLIST_ID' => $wishlistID,
                         'PRODUK_ID' => $id
@@ -98,7 +98,7 @@ class HomeController extends Controller
             }
              else {
 
-                $delete = DB::table('detail_wishlist')
+                $delete = DB::table('DETAIL_WISHLIST')
                 ->where('WISHLIST_ID', '=', $wishlistID)
                 ->where('PRODUK_ID', '=', $id)
                 ->delete();

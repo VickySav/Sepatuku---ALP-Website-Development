@@ -12,27 +12,27 @@ class CategoryController extends Controller
     {
         $search = $request->input('search_input');
         if ($search !== null){
-            $dataProducts = DB::table('produk')
+            $dataProducts = DB::table('PRODUK')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('NAMA_PRODUK', 'like', '%' . $search . '%')
             ->paginate(9);
         }
         else if (session()->has('KATEGORI_ID')) {
             $id = session('KATEGORI_ID');
-            $dataProducts = DB::table('produk')
+            $dataProducts = DB::table('PRODUK')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('KATEGORI_ID', '=', $id)
             ->paginate(9);
         } else if (session()->has('BRAND')){
             $brand = session('BRAND');
-            $dataProducts = DB::table('produk')
+            $dataProducts = DB::table('PRODUK')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('NAMA_PRODUK', 'like', '%' . $brand . '%')
             ->paginate(9);
         }else if(session()->has('MINPRICE') || session()->has('MAXPRICE')){
             $MINPRICE = session('MINPRICE');
             $MAXPRICE = session('MAXPRICE');
-            $dataProducts = DB::table('produk')
+            $dataProducts = DB::table('PRODUK')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->where('HARGA', '>=', $MINPRICE)
             ->where('HARGA', '<=', $MAXPRICE)
@@ -41,7 +41,7 @@ class CategoryController extends Controller
                 session()->forget(['MINPRICE', 'MAXPRICE']);
             }
         } else{
-            $dataProducts = DB::table('produk')
+            $dataProducts = DB::table('PRODUK')
             ->select('PRODUK_ID', 'NAMA_PRODUK', 'IMAGE', 'HARGA')
             ->paginate(9);
         }
@@ -57,7 +57,7 @@ class CategoryController extends Controller
     }
 
     public static function getCategories(){
-        $categories = collect(DB::select('select * from kategori'));
+        $categories = collect(DB::select('select * from KATEGORI'));
         return $categories;
     }
 

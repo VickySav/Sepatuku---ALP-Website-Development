@@ -89,7 +89,7 @@
                                     aria-expanded="false">{{ Session::get('USERNAME') ?? Cookie::get('USERNAME')}}</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item"><a class="nav-link" href="{{route('logout')}}">logout</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">history</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/history">history</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>

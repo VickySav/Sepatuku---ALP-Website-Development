@@ -32,14 +32,18 @@
                     <tbody>
                         {{-- PRODUK WISHLIST DRI DATABASE --}}
                         @foreach ($dataWishlist as $wishlist)
+                        @php
+                        $nameStrip = str($wishlist->NAMA_PRODUK)->replace(' ', '-');
+                        @endphp
                         <tr>
                             <td>
                                 <div class="media">
+                                    <a href="{{ url("/product-details/{$wishlist->PRODUK_ID}-{$nameStrip}")}}">
                                     <div class="d-flex">
                                         <img src="{{ $wishlist->IMAGE }}" style="width: 100px; height:100px; object-fit:cover;" alt="">
-                                    </div>
+                                    </div> </a>
                                     <div class="media-body">
-                                        <p>{{ $wishlist->NAMA_PRODUK }}</p>
+                                        <a href="{{ url("/product-details/{$wishlist->PRODUK_ID}-{$nameStrip}")}}">   <p style="color: black">{{ $wishlist->NAMA_PRODUK }}</p> </a>
                                     </div>
                                 </div>
                             </td>

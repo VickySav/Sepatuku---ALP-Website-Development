@@ -144,6 +144,7 @@ class CartController extends Controller
     'ACCOUNT_ID' => $userID,
     'TOTAL_HARGA' => $amount,
     ]);
+
     $latestOrderID = DB::table('ORDER_TABLE')
     ->select(DB::raw('MAX(ORDER_ID) AS latest_order_id'))
     ->orderBy('ORDER_TIME', 'DESC')

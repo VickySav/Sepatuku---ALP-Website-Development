@@ -9,7 +9,7 @@ class AdminController extends Controller
     public function ShowTransaction(Request $request)
     {
         $query = DB::table('ORDER_TABLE as o')
-        ->join('account as a', 'a.account_id', '=', 'o.account_id')
+        ->join('ACCOUNT as a', 'a.account_id', '=', 'o.account_id')
         ->select('o.order_id', 'a.username', 'o.order_time', 'o.total_harga');
 
         $search = $request->input('search_input');
@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
     public function ShowCatalog(Request $request)
     {
-        $query= DB::table('produk')
+        $query= DB::table('PRODUK')
             ->select('produk_id', 'nama_produk', 'image', 'deskripsi', 'harga');
 
 
@@ -37,7 +37,7 @@ class AdminController extends Controller
     public function AddNewProduct(Request $request)
     {
         //cek nama produk di db
-        $checkProduct = DB::table('produk')
+        $checkProduct = DB::table('PRODUK')
         ->select('produk_id','nama_produk')
         ->where('nama_produk', '=',$request->name)
         ->first();
@@ -65,10 +65,10 @@ class AdminController extends Controller
                 'harga' => $validatedData['price'],
             ]);
 
-            $produkId = DB::table('produk')
+            $produkId = DB::table('PRODUK')
             ->max('produk_id');
 
-            $insertDetailProduk = DB::table('detail_produk')->insert([
+            $insertDetailProduk = DB::table('DETAIL_PRODUK')->insert([
                 'produk_id' => $produkId,
                 'ukuran' => $validatedData['size'],
                 'jumlah' => $validatedData['amount'],
@@ -91,15 +91,15 @@ class AdminController extends Controller
                 'amount' => 'required',
             ]);
             //cek ukurannya udah ada di db ato belum
-            $cekUkuran = DB::table('produk')
-            ->join('detail_produk', 'produk.produk_id', '=', 'detail_produk.produk_id')
+            $cekUkuran = DB::table('PRODUK')
+            ->join('DETAIL_PRODUK', 'PRODUK.produk_id', '=', 'DETAIL_PRODUK.produk_id')
             ->select('ukuran')
-            ->where('detail_produk.ukuran', '=',$validatedData['size'])
-            ->where('produk.nama_produk',"=",$validatedData['name']);
+            ->where('DETAIL_PRODUK.ukuran', '=',$validatedData['size'])
+            ->where('PRODUK.nama_produk',"=",$validatedData['name']);
             // Kalau sizenya ga ada di insert
             if ($cekUkuran->count() == 0)
             {
-                $insert = DB::table('detail_produk')->insert([
+                $insert = DB::table('DETAIL_PRODUK')->insert([
                     'produk_id' => $produkId,
                     'ukuran' => $validatedData['size'],
                     'jumlah' => $validatedData['amount'],
@@ -115,7 +115,7 @@ class AdminController extends Controller
             else
             {
                 // cek jumlah barang
-                $cekjumlahh = DB::table('detail_produk')
+                $cekjumlahh = DB::table('DETAIL_PRODUK')
                 ->select('jumlah')
                 ->where('produk_id', '=',$produkId)
                 ->where('ukuran',"=",$validatedData['size'])
@@ -124,7 +124,7 @@ class AdminController extends Controller
                 //data di db + user input
                 $cekjumlah =$cekjumlahh->jumlah + $validatedData['amount'];
                 //dd($cekjumlah);
-                $update = DB::table('detail_produk')
+                $update = DB::table('DETAIL_PRODUK')
                 ->where('produk_id', $produkId)
                 ->where('ukuran', $validatedData['size'])
                 ->update([
@@ -171,7 +171,7 @@ class AdminController extends Controller
         }
         // Kalau ga ada image update yang ga pake image
         else {
-            $update = DB::table('produk')
+            $update = DB::table('PRODUK')
                 ->where('produk_id', $request->produkid)
                 ->update([
                     'nama_produk' => $validatedData['name'],
@@ -189,13 +189,13 @@ class AdminController extends Controller
             $updateSize=true;
 
             //this is troll but it's work
-            DB::table('detail_produk')
+            DB::table('DETAIL_PRODUK')
             ->where('produk_id', $request->produkid)
             ->delete();
 
             foreach ($sizes as $index => $size) {
                 if($size>0) {
-                    $result = DB::table('detail_produk')
+                    $result = DB::table('DETAIL_PRODUK')
                         ->where('produk_id', $request->produkid)
                         ->UpdateorInsert(
                             ['produk_id' => $request->produkid,
@@ -217,19 +217,19 @@ class AdminController extends Controller
     }
     public function ShowEditProduct($id)
     {
-        $produk = DB::table('produk')
+        $produk = DB::table('PRODUK')
             ->select('produk_id','nama_produk', 'deskripsi', 'harga','image','kategori_id')
             ->where('produk_id', $id)
             ->first();
 
 
-        $dproduct = DB::table('detail_produk')
+        $dproduct = DB::table('DETAIL_PRODUK')
                 ->select('ukuran', 'jumlah')
                 ->where('produk_id', $id)
                 ->get();
 
 
-        $query= DB::table('produk')
+        $query= DB::table('PRODUK')
         ->select('produk_id', 'nama_produk', 'image', 'deskripsi', 'harga');
 
         $products = $query->paginate(5);
@@ -238,12 +238,12 @@ class AdminController extends Controller
 
     public function DeleteProduct($id)
     {
-        DB::table('detail_produk')
+        DB::table('DETAIL_PRODUK')
         ->where('produk_id', $id)
         ->delete();
 
         DB::select('SET FOREIGN_KEY_CHECKS = 0;');
-        DB::table('produk')
+        DB::table('PRODUK')
         ->where('produk_id', $id)
         ->delete();
         DB::select('SET FOREIGN_KEY_CHECKS = 1;');
@@ -266,7 +266,7 @@ class AdminController extends Controller
         ", [$id]);
 
 
-        $id=DB::table('order_table')
+        $id=DB::table('ORDER_TABLE')
         ->select('order_id','order_time')
         ->where('order_id', $id)
         ->first();

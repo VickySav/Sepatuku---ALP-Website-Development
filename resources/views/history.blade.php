@@ -16,6 +16,7 @@
         </div>
     </section>
     <!-- End Banner Area -->
+    @if(isset($historyData) && count($historyData) > 0)
     <section class="cart_area">
         <div class="container">
             <div class="accordion" id="accordionExample">
@@ -35,7 +36,7 @@
                             Detail
                         </button>
                     </div>
-                    
+
                     <div id="collapse{{$count}}" class="accordion-collapse collapse collapse" aria-labelledby="heading{{$count}}" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="cart_inner">
@@ -43,10 +44,10 @@
                                     <table class="table text-center">
                                         <thead>
                                             <tr>
-                                                
+
                                                 <th scope="col" class="text-left">Product</th>
                                                 <th scope="col">Size</th>
-                                                
+
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Total</th>
                                             </tr>
@@ -76,7 +77,7 @@
                                                     <h5>{{ $detail->JUMLAH }}</h5>
                                                 </td>
                                                 <td>
-                
+
                                                     <h5>Rp {{ number_format($detail->TOTAL, 0, ',', '.') }}</h5>
                                                 </td>
                                             </tr>
@@ -85,7 +86,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     @php
                     $count++;
@@ -96,8 +97,19 @@
             </div>
         </div>
     </section>
-    
-        
-    
+    @else
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner text-center"> <!-- Add text-center class to center align the content -->
+                <h1>You don't have any history</h1>
+                <br>
+                <h4>Find your shoes here</h4>
+                <div class="checkout_btn_inner d-flex align-items-center justify-content-center"> <!-- Add justify-content-center class to center align the button -->
+                    <a class="gray_btn" href="/shop">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 </body>
 @endsection

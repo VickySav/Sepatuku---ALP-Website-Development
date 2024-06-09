@@ -19,7 +19,7 @@ class ShouldAdminMiddleware
     {
         $userCookie=Cookie::get('ACCOUNT_ID');
         $userSession=Session::get('ACCOUNT_ID');
-        $DBuser= $DBuser = DB::table('Account')
+        $DBuser= $DBuser = DB::table('ACCOUNT')
         ->where('ACCOUNT_ID', '=',$userCookie )
         ->orWhere('ACCOUNT_ID', '=', $userSession )
         ->first();

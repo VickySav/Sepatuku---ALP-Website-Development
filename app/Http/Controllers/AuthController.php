@@ -23,7 +23,7 @@ class AuthController extends Controller
     {
         $user = $request->only("name","password");
         //$DBuser= DB::table('Account')->where('email', '=', $user['email'])->first();
-        $DBuser = DB::table('Account')
+        $DBuser = DB::table('ACCOUNT')
         ->where('email', '=', $user['name'])
         ->orWhere('username', '=', $user['name'])
         ->first();
@@ -100,17 +100,17 @@ class AuthController extends Controller
                 'PHONE_NUMBER' => $validatedData['phone'],
                 'ADDRESS' => $validatedData['address'],
             ]);
-            $accountId = DB::table('account')
+            $accountId = DB::table('ACCOUNT')
                     ->select('account_id')
                     ->where('username', '=', $validatedData['username'])
                     ->value('account_id');
 
-            $insertCart = DB::table('cart')->insert([
+            $insertCart = DB::table('CART')->insert([
                 'ACCOUNT_ID'=> $accountId,
                 'NAMA_CART'=> DB::raw('fGenCart("' . $validatedData['username'] . '")'),
             ]);
 
-            $insertCart = DB::table('wishlist')->insert([
+            $insertCart = DB::table('WISHLIST')->insert([
                 'ACCOUNT_ID'=> $accountId,
                 'NAMA_WISHLIST'=> DB::raw('fGenWishList("' . $validatedData['username'] . '")'),
             ]);
@@ -147,7 +147,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email',
         ]);
-        $DBuser = DB::table('Account')
+        $DBuser = DB::table('ACCOUNT')
         ->where('email', '=', $request->email)
         ->first();
 
