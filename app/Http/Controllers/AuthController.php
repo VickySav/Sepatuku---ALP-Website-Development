@@ -17,7 +17,15 @@ class AuthController extends Controller
     {
         HomeController::clearFilterSession();
 
-        return view("login");
+        if(Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
+        {
+             return redirect()->back();
+        }
+        else
+        {
+            return view("login");
+        }
+
     }
     public function PostLogin(Request $request)
     {

@@ -147,7 +147,7 @@ class AdminController extends Controller
             'kategori_id' => 'required',
             'price' => 'required|numeric',
             'size.*' => 'required|integer',
-            'amount.*' => 'required|integer',
+            'amount.*' => 'required|integer|min:0',
         ]);
         //kalau ada image
         if ($request->hasFile('image')) {
