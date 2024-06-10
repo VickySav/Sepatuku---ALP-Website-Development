@@ -1,5 +1,5 @@
 @section("title", "JUDUL")
-@extends("template.main")
+@extends("Template.main")
 @section("body")
 	<!--================Registration Box Area =================-->
 	<section class="login_box_area section_gap">

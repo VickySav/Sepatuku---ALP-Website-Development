@@ -1,5 +1,5 @@
 @section("title", "Admin - Trasaction")
-@extends("template.admin-main")
+@extends("Template.admin-main")
 @section("body")
 <body>
 

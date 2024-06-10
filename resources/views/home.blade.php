@@ -1,5 +1,5 @@
 @section("title", "JUDUL")
-@extends("template.main")
+@extends("Template.main")
 @section("body")
 	<!-- End Header Area -->
 

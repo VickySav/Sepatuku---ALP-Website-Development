@@ -1,6 +1,6 @@
 @section("title", "Admin - CRUD")
 @section("title", "Admin - Edit Product")
-@extends("template.admin-main")
+@extends("Template.admin-main")
 <style>
     .alert {
       padding: 20px;

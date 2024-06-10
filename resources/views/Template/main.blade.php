@@ -1,3 +1,3 @@
-@include("template.header")
+@include("Template.header")
 @yield("body")
-@include("template.footer")
+@include("Template.footer")

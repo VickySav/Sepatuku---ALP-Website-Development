@@ -1,2 +1,2 @@
-@include("template.admin-header")
+@include("Template.admin-header")
 @yield("body")

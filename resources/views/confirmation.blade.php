@@ -1,5 +1,5 @@
 @section("title", "Sepatuku Cart")
-@extends("template.main")
+@extends("Template.main")
 @section("body")
 
 	<!-- Start Banner Area -->
