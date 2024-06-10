@@ -21,17 +21,17 @@
 	<!--
 		CSS
 		============================================= -->
-	<link rel="stylesheet" href="{{ assets('css/linearicons.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/font-awesome.min.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/themify-icons.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/owl.carousel.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/nice-select.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/nouislider.min.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/ion.rangeSlider.css') }}" />
-	<link rel="stylesheet" href="{{ assets('css/ion.rangeSlider.skinFlat.css') }}" />
-	<link rel="stylesheet" href="{{ assets('css/magnific-popup.css') }}">
-	<link rel="stylesheet" href="{{ assets('css/main.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/linearicons.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/ion.rangeSlider.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/ion.rangeSlider.skinFlat.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -45,22 +45,22 @@
     });
     </script>
     --}}
-    <script src="{{ assets('js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery-2.2.4.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
     crossorigin="anonymous"></script>
-    <script src="{{ assets('js/vendor/bootstrap.min.js') }}"></script>
-    <script src="{{ assets('js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ assets('js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ assets('js/jquery.sticky.js') }}"></script>
-    <script src="{{ assets('js/nouislider.min.js') }}"></script>
-    <script src="{{ assets('js/countdown.js') }}"></script>
-    <script src="{{ assets('js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ assets('js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('js/countdown.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
     <!--gmaps Js-->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
-    <script src="{{ assets('js/gmaps.min.js') }}"></script>
-    <script src="{{ assets('js/main.js') }}"></script>
+    <script src="{{ asset('js/gmaps.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -223,7 +223,7 @@
                         @if (Session::has('ACCOUNT_ID') || isset($_COOKIE['ACCOUNT_ID']))
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="/{{$produk->IMAGE}}" alt=""> </a>
+								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="{{ asset($produk->IMAGE) }}" alt=""> </a>
 								<div class="product-details">
 									<h6 style="height: 57.56px">{{ $produk->NAMA_PRODUK }}</h6>
 									<div class="price">
