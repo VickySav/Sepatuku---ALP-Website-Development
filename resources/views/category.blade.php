@@ -4,7 +4,7 @@
     <!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Favicon-->
-	<link rel="shortcut icon" href="/img/sepatuku.png">
+	<link rel="shortcut icon" href="{{ asset('/img/sepatuku.png')}}">
 	<!-- Author Meta -->
 	<meta name="author" content="CodePixar">
 	<!-- Meta Description -->
@@ -64,7 +64,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    
 </head>
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
@@ -72,7 +72,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="/"><img src="/img/sepatuku.png" alt="" style="width: 180px;"></a>
+					<a class="navbar-brand logo_h" href="/"><img src="{{ asset('/img/sepatuku.png')}}" alt="" style="width: 180px;"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
