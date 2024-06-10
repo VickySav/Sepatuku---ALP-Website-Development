@@ -12,7 +12,7 @@ class WishlistController extends Controller
 
         $userID = HomeController::getUserID();
         $dataWishlist = $this->getWishlist($userID);
-        return view("Wishlist", [
+        return view("wishlist", [
             "dataWishlist" => $dataWishlist
         ]);
     }

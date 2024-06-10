@@ -17,7 +17,7 @@ class CartController extends Controller
                     ->where('ACCOUNT_ID', '=', $userID)
                     ->value('CART_ID');
 
-        return view("Cart", [
+        return view("cart", [
             "dataCart" => $dataCart,
         ]);
     }
