@@ -244,7 +244,7 @@
                         @else
                         <div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="/{{$produk->IMAGE}}" alt=""> </a>
+								<a href="{{ url("/product-details/{$produk->PRODUK_ID}-{$nameStrip}")}}"> <img class="img-fluid" src="{{ asset($produk->IMAGE) }}" alt=""> </a>
 								<div class="product-details">
 									<h6>{{ $produk->NAMA_PRODUK }}</h6>
 									<div class="price">
@@ -307,7 +307,7 @@
                             @endphp
                             <div class="col-lg-4 col-md-4 col-sm-6 mb-20 d-flex justify-content-center">
                                 <div class="single-related-product d-flex">
-                                    <a href="{{ url("/product-details/{$randomProduct->PRODUK_ID}-{$nameStrip}")}}"><img src="/{{ $randomProduct->IMAGE }}" alt="" style="height: 80px"></a>
+                                    <a href="{{ url("/product-details/{$randomProduct->PRODUK_ID}-{$nameStrip}")}}"><img src="{{ asset($randomProduct->IMAGE) }}" alt="" style="height: 80px"></a>
                                     <div class="desc">
                                         <a href="{{ url("/product-details/{$randomProduct->PRODUK_ID}-{$nameStrip}")}}" class="title">{{ $randomProduct->NAMA_PRODUK }}</a>
                                         <div class="price">
