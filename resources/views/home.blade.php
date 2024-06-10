@@ -25,7 +25,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="/img/banner/banner-img.png" alt="">
+									<img class="img-fluid" src="{{ asset('/img/banner/banner-img.png')}}" alt="">
 								</div>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="/assets/Air-Jordan-Sunset.webp" alt="">
+									<img class="img-fluid" src="{{ asset('/assets/Air-Jordan-Sunset.webp')}}" alt="">
 								</div>
 							</div>
 						</div>
@@ -62,7 +62,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-features">
 						<div class="f-icon">
-							<img src="img/features/f-icon1.png" alt="">
+							<img src="{{ asset('img/features/f-icon1.png')}}" alt="">
 						</div>
 						<h6>Free Delivery</h6>
 						<p>Free Shipping on All Order</p>
@@ -72,7 +72,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-features">
 						<div class="f-icon">
-							<img src="img/features/f-icon2.png" alt="">
+							<img src="{{ asset('img/features/f-icon2.png')}}" alt="">
 						</div>
 						<h6>Return Policy</h6>
 						<p>Money-Back Guarantee Within 7 Days</p>
@@ -82,7 +82,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-features">
 						<div class="f-icon">
-							<img src="img/features/f-icon3.png" alt="">
+							<img src="{{ asset('img/features/f-icon3.png')}}" alt="">
 						</div>
 						<h6>24/7 Support</h6>
 						<p>Fast Response</p>
@@ -92,7 +92,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-features">
 						<div class="f-icon">
-							<img src="img/features/f-icon4.png" alt="">
+							<img src="{{ asset('img/features/f-icon4.png')}}" alt="">
 						</div>
 						<h6>Secure Payment</h6>
 						<p>Supports Online Debit</p>
@@ -112,7 +112,7 @@
 						<div class="col-lg-8 col-md-8">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="/assets/for-sport.png" style="height:191.49px" alt="">
+								<img class="img-fluid w-100" src="{{ asset('/assets/for-sport.png')}}" style="height:191.49px" alt="">
 								<a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Sneaker for Sports</h6>
@@ -123,7 +123,7 @@
 						<div class="col-lg-4 col-md-4">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="/assets/1-1.jpg" style="height:191.78px" alt="">
+								<img class="img-fluid w-100" src="{{ asset('/assets/1-1.jpg')}}" style="height:191.78px" alt="">
 								<a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Sneaker for Sports</h6>
@@ -134,7 +134,7 @@
 						<div class="col-lg-4 col-md-4">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="/assets/product-couple.jpg" style="height:191.78px" alt="">
+								<img class="img-fluid w-100" src="{{ asset('/assets/product-couple.jpg')}}" style="height:191.78px" alt="">
 								<a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Product for Couple</h6>
@@ -145,7 +145,7 @@
 						<div class="col-lg-8 col-md-8">
 							<div class="single-deal">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c4.jpg" alt="">
+								<img class="img-fluid w-100" src="{{ asset('img/category/c4.jpg')}}" alt="">
 								<a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Sneaker for Sports</h6>
@@ -158,7 +158,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-deal">
 						<div class="overlay"></div>
-						<img class="img-fluid w-100" src="/assets/Adidas-Samba.jpg" style="height:413.9px" alt="">
+						<img class="img-fluid w-100" src="{{ asset('/assets/Adidas-Samba.jpg')}}" style="height:413.9px" alt="">
 						<a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
 							<div class="deal-details">
 								<h6 class="deal-title">Sneaker for Sports</h6>
@@ -316,19 +316,19 @@
 		<div class="container">
 			<div class="row">
 				<a class="col single-img">
-					<img class="img-fluid d-block mx-auto" src="/assets/nike-logo.png" alt="" style="width:100px">
+					<img class="img-fluid d-block mx-auto" src="{{ asset('/assets/nike-logo.png')}}" alt="" style="width:100px">
 				</a>
 				<a class="col single-img">
-					<img class="img-fluid d-block mx-auto" src="/assets/adidas-logo.png" alt="" style="width:100px">
+					<img class="img-fluid d-block mx-auto" src="{{ asset('/assets/adidas-logo.png')}}" alt="" style="width:100px">
 				</a>
 				<a class="col single-img">
-					<img class="img-fluid d-block mx-auto" src="/assets/reebok-logo.png" alt="" style="width:100px">
+					<img class="img-fluid d-block mx-auto" src="{{ asset('/assets/reebok-logo.png')}}" alt="" style="width:100px">
 				</a>
 				<a class="col single-img">
-					<img class="img-fluid d-block mx-auto" src="/assets/puma-logo.png" alt="" style="width:100px">
+					<img class="img-fluid d-block mx-auto" src="{{ asset('/assets/puma-logo.png')}}" alt="" style="width:100px">
 				</a>
 				<a class="col single-img">
-					<img class="img-fluid d-block mx-auto" src="/assets/converse-logo.png" alt="" style="width:100px">
+					<img class="img-fluid d-block mx-auto" src="{{ asset('/assets/converse-logo.png')}}" alt="" style="width:100px">
 				</a>
 			</div>
 		</div>

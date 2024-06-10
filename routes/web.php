@@ -62,6 +62,7 @@ Route::middleware([ShouldAdminMiddleware::class])->group(function() {
         Route::get('/detail-transaction/{id}', [AdminController::class,'ShowDetailTransaction'])->name("ShowDetailTransaction");
     });
 });
+
 // Route::view('/admin/manageproduct','admin-catalog');
 //Route::view('/confirm', 'confirmation');
 //Route::view('/tracking', 'tracking');
